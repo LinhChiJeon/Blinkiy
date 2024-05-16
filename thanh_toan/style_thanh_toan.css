@@ -508,6 +508,7 @@ i.fa-user, i.fa-cart-shopping, i.fa-heart
     font-size: 20px;
     font-style: Poly;
     margin: 0 5px;
+    font-weight: bold;
 }
 
 .current {
@@ -527,6 +528,7 @@ i.fa-user, i.fa-cart-shopping, i.fa-heart
     margin-top: 3%;
     margin-left: 4.948%;
     margin-bottom: 60px;
+    font-family:'Times New Roman', Times, serif;
 }
 
 .confirm {
@@ -591,7 +593,6 @@ i.fa-user, i.fa-cart-shopping, i.fa-heart
     grid-template-rows: 50% repeat(2, 12.5%) 25%;
     grid-gap: 0 2%;
     align-items: center;
-    border: 0.25px solid #ccc;
     padding: 0;
     margin: 1%;
     max-width: 100%;
@@ -615,32 +616,35 @@ i.fa-user, i.fa-cart-shopping, i.fa-heart
 
 .item_name {
     grid-column: 2;
-    grid-row: 1;
+    grid-row: span(2);
     margin: 0;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 18px;
 }
 
 .item_color {
-    grid-column: 2;
-    grid-row: 2;
-    margin: 0;
-    margin-bottom: 8px;
-}
-
-.item_size {
     grid-column: 2;
     grid-row: 3;
     margin: 0;
     margin-bottom: 8px;
 }
 
-.quantity_values {
+.item_size {
+    grid-column: 2;
+    grid-row: 4;
+    margin: 0;
+    margin-bottom: 8px;
+}
+
+.item_quantity {
+    grid-column: 3;
+    grid-row: 1;
     border-right: 0;
     border-left: 0;
     text-align: center;
     max-width: 100%;
     background-color: white;
+    justify-self: end;
 }
   
 .item_total {

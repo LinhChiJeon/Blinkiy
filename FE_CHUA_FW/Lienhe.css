@@ -1,0 +1,85 @@
+.title_2LH{
+    height: 130px;
+    font-family: "Epilogue", sans-serif;
+    margin-top: 211px; 
+    display: flex;
+    align-items: center;
+    background-image: url(Screenshot\ 2023-12-12\ 131049.png);
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.title_2LH_content{
+    width: auto;
+    margin: 0;
+    color: white;
+    font-family: Dongle;
+    font-size: 80px; 
+    margin-left: 5%;
+}
+.LHmain{
+    margin-top: 2%;
+    font-family: "Epilogue", sans-serif;
+    display: flex;
+    flex-direction: row;
+    font-size: 20px;
+}
+.form{
+    flex: 5;
+    margin-left: 5%;
+}
+.Storei4{
+    flex: 3;
+}
+.Forminstruction{
+    width: 80%;
+}
+.form input{
+    width :350%;
+    height: 30px;
+    border: 1px solid gainsboro;
+    border-radius: 5px;
+}
+.input_i4{
+    width: 55%;
+    height: 3%;
+}
+.input_Q {
+    display: flex;
+    align-items: flex-start;
+}
+#QUEST {
+    height: auto;
+    min-height: 60px;
+    width: 350%;
+    resize: vertical;
+    overflow-y: auto;
+    margin-top: 10px;
+}
+form button{
+    margin-top: 10px;
+    font-size: 20px;
+    font-family: "Epilogue", sans-serif;
+    color: white;
+    padding: 5px 10px 5px 10px;
+    background-color: red;
+    border: none;
+    border-radius: 5px;
+}
+.Storei4, .Storei4 p{
+    width: 75%;
+}
+.Storei4 button{
+    border: none;
+    border-radius: 5px;
+    background-color: whitesmoke;
+    height: 70px;
+    width: 70px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1);
+    margin: 3px;
+}
+.Storei4 button:hover{
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+.Storei4 img{
+    padding-right: 3%;
+}

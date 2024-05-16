@@ -508,6 +508,7 @@ i.fa-user, i.fa-cart-shopping, i.fa-heart
     font-size: 20px;
     font-style: Poly;
     margin: 0 5px;
+    font-weight: bold;
 }
 
 .current {
