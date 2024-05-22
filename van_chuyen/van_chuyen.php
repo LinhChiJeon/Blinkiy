@@ -7,7 +7,6 @@
         <link rel="stylesheet" href="style_van_chuyen.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
         <title>Shopping Cart | Blinkiy</title>
     </head>
 <body>
@@ -84,7 +83,7 @@
     <div class="details">
         <p class="header_details">VẬN CHUYỂN</p>
         <p class="instruction">Hãy điền địa chỉ của bạn hoặc <a href="#log_in">Đăng nhập</a></p>
-        <form id="input_form">
+        <form id="input_form" method="get" action="#">
             <table class="input_container">
                 <tr>
                     <td colspan="2">
@@ -103,21 +102,23 @@
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="2">
-                        <select id="city" aria-label=".form-select-sm" required> <!-- Sửa lại phần này sau, cập nhật các địa điểm mới nhất-->
-                            <option value="" selected>Chọn tỉnh thành</option>           
+                    <td>
+                        <select id="city" name="city" required> 
+                            <option value="">Chọn tỉnh thành</option>
+                            <?php
+                                include "conn.php"; 
+                                $danhsachTinh = $connect->query("SELECT * FROM TINH");
+                                while ($t = $danhsachTinh->fetch_assoc())
+                                {
+                                    echo "<option value='".$t['MaTinh']."'>".$t['TenTinh']."</option>";
+                                }
+                                $connect->close();
+                            ?>           
                         </select>
                     </td>
-                </tr>
-                <tr>
                     <td>
-                        <select id="district" aria-label=".form-select-sm" required>
-                            <option value="" selected>Chọn quận huyện</option>
-                        </select>
-                    </td>
-                    <td>
-                        <select id="ward" aria-label=".form-select-sm" required>
-                            <option value="" selected>Chọn phường xã</option>
+                        <select id="district" name="district" required>
+                            <option value="">Chọn quận huyện</option>
                         </select>
                     </td>
                 </tr>
@@ -167,11 +168,41 @@
               </div>
         </div>
     </footer>
-      <script src="script_van_chuyen.js">
+    <script src="script_van_chuyen.js">
         const phoneInputField = document.querySelector("#phone_num");
         const phoneInput = window.intlTelInput(phoneInputField, {
             utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
         });
+        $(document).ready(function(){
+            $('#city').change(function(){
+        var city = $(this).val();
+        if(city){
+            $.ajax({
+                type: 'GET',
+                url: '',
+                data: {city: city, action: 'fetch_district'},
+                success: function(response){
+                    $('#district').html(response);
+                }
+            });
+        }else{
+            $('#district').html('<option value="">Chọn quận huyện</option>');
+        }   
+        });
+    });
     </script>
+    <?php
+        if(isset($_GET['action']) && $_GET['action'] == 'fetch_district'){
+            include "conn.php"; 
+            $maTinh = $_GET['city'];
+            $danhsachHuyen = $connect->query("SELECT * FROM HUYEN WHERE MaTinh = '$maTinh'");
+            echo '<option value="">Chọn phòng ban</option>';
+            while ($h = $danhsachHuyen->assoc()){
+                echo '<option value="'.$h['MaHuyen'].'">'.$h['TenHuyen'].'</option>';
+            }
+            $connect->close();
+            exit;
+        }
+    ?>
 </body>
 </html>
