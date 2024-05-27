@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bên trong từng sản phẩm</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    
+    <div class="filter_from_product_page">
+        <p>
+            <a href=""><span id="product_name">Sản phẩm</span></a>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
+            </svg> 
+            <a href=""><span id="filter_link_from_name">Vòng tay đá phong thủy hoa sen trắng</span></a>
+        </p>
+    </div>
+    
+    <div class="below_filter">
+        <div class="image_container">
+            <div class="image_wrapper">
+                <button class="left_btn" style="display: block;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"/>
+                    </svg>
+                </button>
+                <img id="main_image" src="https://via.placeholder.com/460x460">
+                <button class="right_btn" style="display: block;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
+                      </svg>
+                </button>
+            </div>
+            <p>
+                <div class="extra_images">
+                    <img class="extra_image" id="extra_image1" src="https://via.placeholder.com/100x100" alt="">
+                    <img class="extra_image" id="extra_image2" src="https://via.placeholder.com/100x100" alt="">
+                    <img class="extra_image" id="extra_image3" src="https://via.placeholder.com/100x100" alt="">
+                    <img class="extra_image" id="extra_image4" src="https://via.placeholder.com/100x100" alt="">
+                </div>
+            </p>
+        </div>
+        
+        
+        <div class="container">
+            <div class="product_container">
+                <h3 id="title"><b>Vòng tay đá phong thủy hoa sen trắng</b></h3>
+                
+                <div class="price">300.000đ</div>
+                
+                <div class="color_container">
+                    <p id="color">Màu sắc</p>
+                    <div class="product_color">
+                        <form action="#">
+                            <input type="checkbox" class="color_selection" id="pink" name="color" onclick="selectOnlyThis(this)">
+                            <label for="pink">Hồng</label>
+                
+                            <input type="checkbox" class="color_selection" id="yellow" name="color" onclick="selectOnlyThis(this)">
+                            <label for="yellow">Vàng</label>
+                
+                            <input type="checkbox" class="color_selection" id="blue" name="color" onclick="selectOnlyThis(this)">
+                            <label for="blue">Xanh dương</label>
+                
+                            <input type="checkbox" class="color_selection" id="green" name="color" onclick="selectOnlyThis(this)">
+                            <label for="green">Xanh lá</label>
+                
+                            <input type="checkbox" class="color_selection" id="purple" name="color" onclick="selectOnlyThis(this)">
+                            <label for="purple">Tím</label>
+                
+                            <input type="checkbox" class="color_selection" id="white" name="color" onclick="selectOnlyThis(this)">
+                            <label for="white">Trắng</label>
+                
+                            <input type="checkbox" class="color_selection" id="multicolor" name="color" onclick="selectOnlyThis(this)">
+                            <label for="multicolor">Nhiều màu</label>
+                        </form>       
+                    </div>
+                </div>
+                
+                
+                <div class="size_container">
+                    <p id="size_of_product">Kích cỡ</p>
+                    <button type="button" class="size" onclick="selectSize(this, 15)">15</button>
+                    <button type="button" class="size" onclick="selectSize(this, 16)">16</button>
+                    <button type="button" class="size" onclick="selectSize(this, 17)">17</button>
+                    <button type="button" class="size" onclick="selectSize(this, 18)">18</button>
+                </div>                
+
+                <div class="quantity_container">
+                    <p id="quantity">Số lượng</p>
+                    <div id="buy_amount">
+                        <button class="minus" id="minus_btn" onclick="handleMinus()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash" viewBox="0 0 16 16">
+                            <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8"/>
+                          </svg>
+                        </button>
+                        <input type="text" name="amount" id="amount" value="1">
+                        <button class="plus" id="plus_btn" onclick="handlePlus()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+                          </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="button_container">
+                <div class="addtocart_container">
+                    <button id="add_product_to_cart" onclick="addToCart()">
+                        <!-- <span class="cart-icon">🛒</span> -->
+                        <span class="cart-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart4" viewBox="0 0 16 16">
+                                <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 
+                                1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5M3.14 5l.5 2H5V5zM6 5v2h2V5zm3 0v2h2V5zm3 
+                                0v2h1.36l.5-2zm1.11 3H12v2h.61zM11 8H9v2h2zM8 8H6v2h2zM5 8H3.89l.5 2H5zm0 5a1 1 0 1 0 0 2 1 1 0 0 0
+                                0-2m-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0m9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2m-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0"/>
+                            </svg>
+                        <span class="btn-text">Thêm vào giỏ hàng</span>
+                    </button>
+                </div>
+                   
+                <div class="buynow_container">
+                    <button id="buy_product_now" onclick="buynow()">
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lightning-fill" viewBox="0 0 16 16">
+                                <path d="M5.52.359A.5.5 0 0 1 6 0h4a.5.5 0 0 1 .474.658L8.694 6H12.5a.5.5 0 0 1 .395.807l-7 9a.5.5 0 0 1-.873
+                                -.454L6.823 9.5H3.5a.5.5 0 0 1-.48-.641z"/>
+                            </svg>
+                        
+                        <span>Mua ngay</span> 
+                    </button> 
+                    <br>
+                </div>
+            </div>
+            
+            <div class="favorite_container">
+                <button id="favorite_product" onclick="toggleFavorite()" class="favorite_button">
+                    <span>
+                        <svg id="heart_svg" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi-heart" viewBox="0 0 16 16">
+                            <path id="heart_path" d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286
+                            6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333
+                            4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
+                        </svg>
+                    </span>
+                    <span>
+                        Yêu thích
+                    </span>
+                </button>
+            </div>       
+        </div>
+    </div>
+    
+    <!-- <div class="container-title">
+                <p>SẢN PHẨM MỚI NHẤT</p>
+                <hr>
+            </div> -->
+    <div class="Product_description">
+        <div class="description_heading">
+            <h4>MÔ TẢ SẢN PHẨM</h4>
+            <hr>
+        </div>
+        <div class="restof_description">
+            <p><b>BERYL PASTEL</b></p>
+            <p>&nbsp;</p>
+            <p>
+                <b>Sơ lược:&nbsp;</b>
+            </p>
+            <p class="text_content">
+                <span style="font-family: 'Arial',sans-serif;">Beryl được đánh giá là một trong các loại khoáng chất đá quý quan trọng, 
+                    có giá trị cao nhất trên thế giới.</span>
+            </p>
+            <p class="text_content">
+                <span style="font-family: 'Arial',sans-serif;">Beryl sở hữu rất nhiều tông màu khác nhau, có thể là xanh lá,
+                    vàng, xanh biển hoặc xanh pha vàng… Có cái tên khác Heliodor – 
+                    mang ý nghĩa là quà tặng của mặt trời. Là viên đá thiêng có thể 
+                    chữa lành nhiều bệnh.&nbsp;
+                </span>
+            </p>
+            <p><b>Khu vực được khai thác: </b>
+                khu vực Nam Mỹ, Tây Mỹ và Trung Mỹ, California, Colorado, Connecticut… Việt Nam (Thanh Hóa và Phú Thọ)
+            </p>
+            <p><b>Thành phần:</b>
+                <span style="font-weight: 400;"> Be3Al2(SiO3)6&nbsp;
+                </span>
+            </p>
+            <p><b>Độ cứng thang Mohs: </b>
+                <span style="font-weight: 400;">8.0/10
+                </span>
+            </p>
+            <p><b>Mạng phù hợp: </b>
+                <span style="font-weight: 400;">Cân bằng ngũ hành
+                </span>
+            </p>
+            <p><b>Tác dụng tinh thần:</b>
+                <span style="font-weight: 400;">&nbsp;
+                </span>
+            </p>
+            <p class="text_content">
+                <span style="font-family: 'Arial',sans-serif;">•&nbsp;Giúp trấn định tinh thần, giảm căng thẳng,
+                giúp cho mối quan hệ giữa bạn và người yêu được thuận lợi, gắn kết với&nbsp;nhau hơn.&nbsp;
+                </span>
+            </p>
+            <p class="text_content">
+                <span style="font-family: 'Arial',sans-serif;">• Thúc đẩy tình yêu hôn nhân.&nbsp;
+                </span>
+            </p>
+            <p class="text_content">
+                <span style="font-family: 'Arial',sans-serif;">• Cho bạn sự can đảm và dũng cảm.&nbsp;
+                    Khả năng phản ứng nhanh chóng và tăng cường trí tuệ, quyết tâm và động lực rũ bỏ sự lười biếng và chây ỳ.&nbsp;
+                </span>
+            </p>
+            <p><b>Tác dụng sức khoẻ:</b>
+                <span style="font-weight: 400;">&nbsp;
+                </span>
+            </p>
+            <p class="text_content">
+                <span style="font-family: 'Arial',sans-serif;">•&nbsp;Củng cố hệ thống tuần hoàn và phổi và loại bỏ các vấn đề&nbsp;
+                    về bệnh liên quan đến hô hấp&nbsp;
+                </span>
+            </p>
+            <p class="text_content">
+                <span style="font-family: 'Arial',sans-serif;">•&nbsp;Làm tăng sức đề kháng của cơ thể&nbsp;
+                </span>
+            </p>
+            <p class="text_content">
+                <span style="font-family: 'Arial',sans-serif;">•&nbsp;Có tính ăn thần cao, chữa lành các vấn đề về cổ họng và hen suyễn&nbsp;
+                </span>
+            </p>
+            <p class="text_content">
+                <span style="font-family: 'Arial',sans-serif;">•&nbsp;Được sử dụng để điều trị các vấn đề liên quan đến 
+                    sỏi thận và bàng quang.&nbsp;
+                </span>
+            </p>
+            <p class="text_content">
+                <span style="font-family: 'Arial',sans-serif;">• Hỗ trợ điều trị cột sống, dạ dày, tim và gan. Giảm tác dụng 
+                    của chấn động và hỗ trợ điều trị tổn thương sọ&nbsp;
+                </span>
+            </p>
+            <p><b>Cách bảo quản hổ phách:&nbsp;</b></p>
+            <p class="text_content">
+                <span style="font-family: 'Arial',sans-serif;">•&nbsp;Beryl khá bền và có khả năng chống hao mòn. 
+                    Nhạy cảm với một số axit.&nbsp;
+                </span>
+            </p>
+            <p class="text_content">
+                <span style="font-family: 'Arial',sans-serif;">•&nbsp;Tránh xịt nước hoa hoặc keo cứng tóc lên vòng.&nbsp;
+                </span>
+            </p>
+            <p class="text_content">
+                <span style="font-family: 'Arial',sans-serif;">• Luôn tháo vòng tay khi tập thể thao, hay làm việc nặng.&nbsp;
+                </span>
+            </p>
+            <p class="text_content">
+                <span style="font-family: 'Arial',sans-serif;">• Bảo quản riêng, không chung đụng với các loại trang sức đá quý khác.&nbsp;
+                </span>
+            </p>
+            <p class="text_content">
+                <span style="font-family: 'Arial',sans-serif;">• Bọc bằng vải mềm, cho vào hộp riêng.&nbsp;
+                </span>
+            </p>
+        </div>
+    </div> 
+
+    <div class="related_product">
+        <section class="product-category">
+            <div class="container-title">
+                <p>SẢN PHẨM LIÊN QUAN</p>
+                <hr>
+            </div>
+
+            <div class="card-container">
+                <div class="pre-btn" >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi-chevron-left" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 
+                        1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"/>
+                      </svg>
+                </div>
+        
+                <div class="carousel">
+                    <div class="list-product-card">
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img class="product-img" src="P1.jpg">
+                            </div>
+                            <div class="product-content">
+                                <a href="">Tên sản phẩm</a>
+                                <p>100.000đ</p>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img class="product-img" src="P2.jpg">
+                            </div>
+                            <div class="product-content">
+                                <a href="">Tên sản phẩm</a>
+                                <p>100.000đ</p>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img class="product-img" src="P3.jpg">
+                            </div>
+                            <div class="product-content">
+                                <a href="">Tên sản phẩm</a>
+                                <p>100.000đ</p>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img class="product-img" src="P4.jpg">
+                            </div>
+                            <div class="product-content">
+                                <a href="">Tên sản phẩm</a>
+                                <p>100.000đ</p>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img class="product-img" src="P5.jpg">
+                            </div>
+                            <div class="product-content">
+                                <a href="">Tên sản phẩm</a>
+                                <p>100.000đ</p>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img class="product-img" src="P6.jpg">
+                            </div>
+                            <div class="product-content">
+                                <a href="">Tên sản phẩm</a>
+                                <p>100.000đ</p>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img class="product-img" src="P7.jpg">
+                            </div>
+                            <div class="product-content">
+                                <a href="">Tên sản phẩm</a>
+                                <p>100.000đ</p>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img class="product-img" src="P8.jpg">
+                            </div>
+                            <div class="product-content">
+                                <a href="">Tên sản phẩm</a>
+                                <p>100.000đ</p>
+                            </div>
+                        </div>       
+                        <div class="carousel-end"></div>
+                    </div>   
+                </div>
+                
+                <div class="nxt-btn" >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi-chevron-right" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
+                    </svg>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+
+    </footer>
+</body>
+<script type="text/javascript" src="process.js"></script>
+</html>
