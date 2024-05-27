@@ -194,6 +194,7 @@
         }
     }
     
+    // Bắt đầu từ đây nha Nghĩa, có gì Nghĩa xóa chỗ màu sắc cho Hoàng với nghen
     // Validate selection
     function validateSelection() {
         const colorSelected = document.querySelector('.color_selection:checked');
@@ -253,6 +254,8 @@
             });
         }
     }
+    //Hếc r nè
+
 
     // AddtoCart button
     // document.getElementById("add_to_cart").addEventListener("click", function() {
