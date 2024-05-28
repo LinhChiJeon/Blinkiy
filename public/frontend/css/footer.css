@@ -1,0 +1,70 @@
+hr{
+    background-color: #EF99A2;
+    border: none;
+    height: 2px;
+    width: 90%;
+    margin-bottom: 1%;
+    margin-top: 1%;
+}
+
+footer {
+    display: flex;
+    flex-direction: column;
+    font-family: "Poly", serif;
+    background-color: #feddee;
+background-image: linear-gradient(94deg, #feddee 0%, #f7df97 100%);
+
+
+    color: #F985A9;
+    padding: 1%;
+    /* background-image: url(img/v2-w2560-relation-bg2.jpg);
+    background-position: top;
+    background-repeat: no-repeat; */
+}
+.brand{
+    margin-left: 4%;
+    display: flex;
+    flex-direction: row;
+    /* justify-content: center; */
+    align-items: center;
+}
+footer .brand img{
+    width: 5%;
+    height: auto;
+}
+.section_container
+{
+    max-width: 96%;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    flex-direction: row;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.footer_section {
+    font-size: 18px;
+    text-align: left;
+    flex: 1;
+    max-width: 15%;
+}
+
+footer a {
+    color: inherit;
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: #cfe411;
+}
+
+.fa-brands {
+    margin-right: 1.5%;
+}
+.footer_section img{
+    width: 10%;
+    margin-right: 2%;
+    margin-bottom: -1%;
+}
