@@ -25,7 +25,6 @@
                     <td>{{ $contact->TieuDe }}</td>
                     <td>{{ $contact->CauHoi }}</td>
                     <td>
-                        {{-- <a href="{{ url('/phan-hoi/' . $contact->stt) }}">Phản hồi lại</a><br> --}}
                         <a href="{{ url('/lich-su-phan-hoi/' . $contact->stt) }}">Lịch sử Phản hồi</a>
                     </td>
                 </tr>

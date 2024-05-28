@@ -28,10 +28,8 @@ class SendEmailController extends Controller
         $emailSubject = $request->input('email_subject');
         $emailBody = $request->input('email_body');
 
-        // Send email using Mailable
         Mail::to($customerEmail)->send(new CustomerEmail($emailSubject, $emailBody));
 
-        // Update PhanHoi field in the contacts table based on the stt
         $contact = Contact::find($stt);
         if ($contact) {
             $contact->PhanHoi = 1;

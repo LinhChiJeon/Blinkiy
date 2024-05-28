@@ -27,7 +27,6 @@
                 <th>Câu hỏi</th>
                 <td>{{ $contact->CauHoi }}</td>
             </tr>
-            <!-- Add other fields as necessary -->
         </table>
     </div>
 

@@ -9,9 +9,9 @@ class Contact extends Model
 {
     use HasFactory;
 
-    protected $table = 'contact'; // Tên bảng trong cơ sở dữ liệu
+    protected $table = 'contact';
 
-    protected $primaryKey = 'stt'; // Khóa chính của bảng
+    protected $primaryKey = 'stt';
 
     protected $fillable = [
         'stt',

@@ -13,15 +13,7 @@ use App\Models\Post;
 // use App\CategoryProductModel;
 use Session;
 use Auth;
-use App\Models\CatePost; //sử dụng model CatePost
-// Mối quan hệ giữa Model và Controller : khi nhận yêu cầu từ form, controller sẽ gọi đến model để thực hiện thao tác với dữ liệu
-// VD : 1. Ng dùng nhập thông tin bài viết vào form thêm danh mục bài viết và nhấn 'submit'
-//      2. Dữ liệu đc gửi đến COntroller (cụ thể là hàm save_category_post trong CategoryPost)
-//      3. Trong hàm save_category_post, Controller gọi Model CatePost
-//      4. Khi phương thức save() của CatePost đc gọi, Eloquent sẽ xử lý và lưu thông tin vào bảng tbl_category_post trong dtb
-//      5. Sau khi lưu thành công, ng dùng sẽ đc thông báo và chuyển hướng trở lại form
-// => Controller phụ trách nhận và xử lý dữ liệu gửi từ ng dùng, sau đó tương tác vs Model để thực hiện các hành dộng gửi lên csdl
-// => Model làm việc trực tiếp vs csdl nhưng sẽ thông qua Controller
+use App\Models\CatePost;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Redirect;
 
