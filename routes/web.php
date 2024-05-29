@@ -22,6 +22,10 @@ Route::post('/send-email-to-customer', [SendEmailController::class, 'sendEmailTo
 
 // Admin routes
 Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+Route::post('/admin-login', [AdminController::class, 'dashboard_login'])->name('admin.login');
+Route::get('/admin-dashboard', [AdminController::class, 'show_dashboard'])->name('admin.dashboard');
+
+
 
 // Category product routes
 Route::get('/add-category-product', [CategoryProduct::class, 'add_category_product']);

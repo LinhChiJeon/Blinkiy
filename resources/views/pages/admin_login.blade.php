@@ -30,7 +30,8 @@
 		}
 	?>
 	
-		<form action="{{URL::to('/admin-dashboard')}}" method="post"> <!--Khi đăng nhập thì sẽ điều hướng đến admin dashboard-->
+		<form action="{{ route('admin.login') }}" method="post">
+		<!--Khi đăng nhập thì sẽ điều hướng đến admin dashboard-->
 			{{ csrf_field() }} <!--Gửi 1 trường chứa token CSRF nhằm để tránh việc bị đánh cắp thông tin-->
 			<input type="text" class="ggg" name="admin_email" placeholder="nhập email" required=""> 
 			<!-- sửa name sao cho trùng với thuộc tính đã tạo ở phpmyadmin -->
