@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mục ưa thích</title>
+    <link rel="stylesheet" href="favor.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+</head>
+
+<body>
+    <header>
+        <div class="top-bar">
+            <div class="logo">
+                <img class="logo-img" src="Logo.jpg">
+                <p class="logo-blinkiy">BLINKIY</p>
+                <p class="logo-phongthuy">PHONG THỦY</p>
+            </div>
+            <div class="search-bar">
+                <div class="search-bar-cover">
+                    <i class="fas fa-search"></i>
+                    <input type="input" class="search-bar-input" id="search-bar-input" name="search-bar-input"
+                        placeholder="Tìm kiếm" />
+                </div>
+            </div>
+            <div class="top-bar-options">
+                <div class="top-bar-options-object">
+                    <i class="fa-solid fa-user"></i>
+                    <a class="top-bar-options-object-title" href="">Tài khoản</a>
+                </div>
+                <div class="top-bar-options-object">
+                    <i class="fa-solid fa-heart"></i>
+                    <a class="top-bar-options-object-title" href="">Yêu thích</a>
+                </div>
+                <div class="top-bar-options-object">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <a class="top-bar-options-object-title" href="">Giỏ hàng</a>
+                </div>
+            </div>
+        </div>
+
+        <nav class="menu-bar">
+            <ul class="mainmenu">
+                <li class="mainmenu-li">
+                    <a class="menu-bar-title" href="">TRANG CHỦ</a>
+                </li>
+                <li class="mainmenu-li">
+                    <a class="menu-bar-title" href="">SẢN PHẨM</a>
+                    <ul class="product-submenu">
+                        <li><a href="">Vòng tay</a></li>
+                        <li><a href="">Dây chuyền</a></li>
+                        <li><a href="">Nhẫn</a></li>
+                        <li><a href="">Charm</a></li>
+                    </ul>
+                </li>
+                <li class="mainmenu-li">
+                    <a class="menu-bar-title" href="">GIỚI THIỆU</a>
+                </li>
+                <li class="mainmenu-li">
+                    <a class="menu-bar-title" href="">BLOG</a>
+                    <ul class="product-submenu">
+                        <li><a href="">Cung-Mệnh</a></li>
+                        <li><a href="">Cẩm nang Blinkiy</a></li>
+                    </ul>
+                </li>
+                <li class="mainmenu-li">
+                    <a class="menu-bar-title" href="">LIÊN HỆ</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="bg-menu">
+            <img class="bg-menu-img" src="menu.jpg">
+        </div>
+    </header>
+    <div class="favor">
+        <div class="favor_container">
+            <div class="header">Mục ưa thích</div>
+            <ul class="cart_items">
+                <li>
+                    <div class="product">
+                        <div class="img_product">
+                            <a href="#">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpe95uh6h9XiwFs2nJse3jZcrDHtfc68V2Css3eyII8Q&s"
+                                    alt="sp">
+                            </a>
+                        </div>
+                        <div class="info">
+                            <p class="product_name">
+                                <a href="#">Vòng tay đá phong thủy hoa sen trắng xinh xắn hợp thời trang</a>
+                            </p>
+                            <p class="product_price">300.000đ</p>
+                        </div>
+                        <div class="choose_type">
+                            <p class="type_size">
+                                <select id="input_size">
+                                    <option value="" selected disabled hidden>- Chọn kích cỡ -</option>
+                                    <option value="">14</option>
+                                    <option value="">15</option>
+                                    <option value="">16</option>
+                                    <option value="">17</option>
+                                    <option value="">18</option>
+                                    <option value="">19</option>
+                                    <optine value="">20</optine>
+                                </select>
+                            </p>
+                            <p class="type_color">
+                                <select id="input_color">
+                                    <option value="" selected disabled hidden>- Chọn màu -</option>
+                                    <option value="">Hồng</option>
+                                    <option value="">Trắng</option>
+                                    <option value="">Xanh dương</option>
+                                    <option value="">Vàng</option>
+                                    <option value="">Xanh lá</option>
+                                    <option value="">Tím</option>
+                                    <optine value="">Nhiều màu</optine>
+                                </select>
+                            </p>
+                            <p class="number-input">
+                                <input type="button" value="-" class="decrease_button">
+                                <input type="number" id="item_quantity" class="quantity_values" name="quantity" value="1" aria-label="Product quantity" size="4" min="1" step="1" inputmode="numeric" autocomplete="off">
+                                <input type="button" value="+" class="increase_button">
+                            </p>
+                        </div>
+                        <div class="add_produce">
+                            <p class="icon"><i class="fa-solid fa-cart-plus"></i></p>
+                            <input type="button" value="Thêm vào giỏ hàng" class="add">
+                        </div>
+                        <p class="remove"><i class="fa-solid fa-trash"></i> Xóa</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="product">
+                        <div class="img_product">
+                            <a href="#">
+                                <img src="data:image/jpeg;base64,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"
+                                    alt="sp">
+                            </a>
+                        </div>
+                        <div class="info">
+                            <p class="product_name">
+                                <a href="#">Vòng tay đá phong thủy hoa sen trắng xinh xắn hợp thời trang</a>
+                            </p>
+                            <p class="product_price">300.000đ</p>
+                        </div>
+                        <div class="choose_type">
+                            <p class="type_size">
+                                <select id="input_size">
+                                    <option value="" selected disabled hidden>- Chọn kích cỡ -</option>
+                                    <option value="">14</option>
+                                    <option value="">15</option>
+                                    <option value="">16</option>
+                                    <option value="">17</option>
+                                    <option value="">18</option>
+                                    <option value="">19</option>
+                                    <optine value="">20</optine>
+                                </select>
+                            </p>
+                            <p class="type_color">
+                                <select id="input_color">
+                                    <option value="" selected disabled hidden>- Chọn màu -</option>
+                                    <option value="">Hồng</option>
+                                    <option value="">Trắng</option>
+                                    <option value="">Xanh dương</option>
+                                    <option value="">Vàng</option>
+                                    <option value="">Xanh lá</option>
+                                    <option value="">Tím</option>
+                                    <optine value="">Nhiều màu</optine>
+                                </select>
+                            </p>
+                            <p class="number-input">
+                                <input type="button" value="-" class="decrease_button">
+                                <input type="number" id="item_quantity" class="quantity_values" name="quantity" value="1" aria-label="Product quantity" size="4" min="1" step="1" inputmode="numeric" autocomplete="off">
+                                <input type="button" value="+" class="increase_button">
+                            </p>
+                        </div>
+                        <div class="add_produce">
+                            <p class="icon"><i class="fa-solid fa-cart-plus"></i></p>
+                            <input type="button" value="Thêm vào giỏ hàng" class="add">
+                        </div>
+                        <p class="remove"><i class="fa-solid fa-trash"></i> Xóa</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="product">
+                        <div class="img_product">
+                            <a href="#">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpe95uh6h9XiwFs2nJse3jZcrDHtfc68V2Css3eyII8Q&s"
+                                    alt="sp">
+                            </a>
+                        </div>
+                        <div class="info">
+                            <p class="product_name">
+                                <a href="#">Vòng tay đá phong thủy hoa sen trắng xinh xắn hợp thời trang</a>
+                            </p>
+                            <p class="product_price">300.000đ</p>
+                        </div>
+                        <div class="choose_type">
+                            <p class="type_size">
+                                <select id="input_size">
+                                    <option value="" selected disabled hidden>- Chọn kích cỡ -</option>
+                                    <option value="">14</option>
+                                    <option value="">15</option>
+                                    <option value="">16</option>
+                                    <option value="">17</option>
+                                    <option value="">18</option>
+                                    <option value="">19</option>
+                                    <optine value="">20</optine>
+                                </select>
+                            </p>
+                            <p class="type_color">
+                                <select id="input_color">
+                                    <option value="" selected disabled hidden>- Chọn màu -</option>
+                                    <option value="">Hồng</option>
+                                    <option value="">Trắng</option>
+                                    <option value="">Xanh dương</option>
+                                    <option value="">Vàng</option>
+                                    <option value="">Xanh lá</option>
+                                    <option value="">Tím</option>
+                                    <optine value="">Nhiều màu</optine>
+                                </select>
+                            </p>
+                            <p class="number-input">
+                                <input type="button" value="-" class="decrease_button">
+                                <input type="number" id="item_quantity" class="quantity_values" name="quantity" value="1" aria-label="Product quantity" size="4" min="1" step="1" inputmode="numeric" autocomplete="off">
+                                <input type="button" value="+" class="increase_button">
+                            </p>
+                        </div>
+                        <div class="add_produce">
+                            <p class="icon"><i class="fa-solid fa-cart-plus"></i></p>
+                            <input type="button" value="Thêm vào giỏ hàng" class="add">
+                        </div>
+                        <p class="remove"><i class="fa-solid fa-trash"></i> Xóa</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+<script src="script_favor.js">
+
+</script>
+
+</html>
