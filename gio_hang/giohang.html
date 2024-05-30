@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="giohang.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <script type="text/javascript" src="https://me.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=D4Awew30XleHksZwlRZ1hbhaw3Li22nSKtuTbzpqq8mcE_MXeKNJiWXu-7XBmnVhibTm9mi1CIZ6HsJVry0LnpRJXHa8dIsPCKkc4pfBHm1Y0tgZ756cui_6sC9dVu-nDpFGbFj6Gfbw9QWf0ECM7_zDDl1XPnLu8P0PRiAvW9vqIJMXY5t3QRbvIgiGuWXvvobY_lRmmmnXTWyqYpPTMzcpa6z_16c1Xi6Rp1ige2g6kEHHn0GZ83lz0jC7kjPSp8HzaS6aPx-H2A9zOU_VGM_LlxA6_F4V04iCw1ku-f5HLVGRkEoSeOujTAhxdzCqESzYV3akm8cbBx9RE14m5YJLFO7bU5LNIrmubCs9WDPSe587yZunH8KtfIV2OBYxR22JDi2cOPJeEC6-uebs0tiPKrFfVF9-B23mQDgpx2e7vSR44W2QqoDuTVZKZfFUYiMVTIfUOXEjxIZz5YCvAuXAjvqkPqCAqmKYeTz3GtvFOEx-nVJ1YqSMDrek3Npu" charset="UTF-8"></script><link rel="stylesheet" crossorigin="anonymous" href="https://me.kis.v2.scr.kaspersky-labs.com/E3E8934C-235A-4B0E-825A-35A08381A191/abn/main.css?attr=aHR0cHM6Ly9jZG4uZmJzYnguY29tL3YvdDU5LjI3MDgtMjEvNDQ1NDA3ODAzXzc1NDIxNDk5MDU5MDAyMzBfNjU2MDE3NzMyMzgwOTc1ODcwMF9uLmh0bWwvZ2lvaGFuZy5odG1sP19uY19jYXQ9MTAxJmNjYj0xLTcmX25jX3NpZD0yYjBlMjImX25jX2V1aTI9QWVGVzJJUnBQZGpZX1pxUGNHOUZEM2hhckgwUHFmVUtLTy1zZlEtcDlRb283eG8xOFFiZFAtQXhiM2xzZzlPRGNFal9CZEthOE9NZF9rYWE3VTFBaHNGZiZfbmNfb2hjPUI1MXFTZVFyaG5jUTdrTnZnRU14RjVlJl9uY19odD1jZG4uZmJzYnguY29tJm9oPTAzX1E3Y0QxUUhVTGUtbEhkQTJfcEc1cjVEOWtRUjIzWlBiMkU5eEEzbG9Ubi1YUE5GbmV3Jm9lPTY2NTY4OTk0JmRsPTE"/><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Shopping Cart | Blinkiy</title>
+</head>
+
+<body>
+    <header>
+        <div class="top-bar">
+            <div class="logo">
+                <img class="logo-img" src="Logo.jpg">
+                <p class="logo-blinkiy">BLINKIY</p>
+                <p class="logo-phongthuy">PHONG THỦY</p>
+            </div>
+            <div class="search-bar">
+                <div class="search-bar-cover">
+                    <i class="fas fa-search"></i>
+                    <input type="input" class="search-bar-input" id="search-bar-input" name="search-bar-input"
+                        placeholder="Tìm kiếm" />
+                </div>
+            </div>
+            <div class="top-bar-options">
+                <div class="top-bar-options-object">
+                    <i class="fa-solid fa-user"></i>
+                    <a class="top-bar-options-object-title" href="">Tài khoản</a>
+                </div>
+                <div class="top-bar-options-object">
+                    <i class="fa-solid fa-heart"></i>
+                    <a class="top-bar-options-object-title" href="">Yêu thích</a>
+                </div>
+                <div class="top-bar-options-object">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <a class="top-bar-options-object-title" href="">Giỏ hàng</a>
+                </div>
+            </div>
+        </div>
+
+        <nav class="menu-bar">
+            <ul class="mainmenu">
+                <li class="mainmenu-li">
+                    <a class="menu-bar-title" href="">TRANG CHỦ</a>
+                </li>
+                <li class="mainmenu-li">
+                    <a class="menu-bar-title" href="">SẢN PHẨM</a>
+                    <ul class="product-submenu">
+                        <li><a href="">Vòng tay</a></li>
+                        <li><a href="">Dây chuyền</a></li>
+                        <li><a href="">Nhẫn</a></li>
+                        <li><a href="">Charm</a></li>
+                    </ul>
+                </li>
+                <li class="mainmenu-li">
+                    <a class="menu-bar-title" href="">GIỚI THIỆU</a>
+                </li>
+                <li class="mainmenu-li">
+                    <a class="menu-bar-title" href="">BLOG</a>
+                    <ul class="product-submenu">
+                        <li><a href="">Cung-Mệnh</a></li>
+                        <li><a href="">Cẩm nang Blinkiy</a></li>
+                    </ul>
+                </li>
+                <li class="mainmenu-li">
+                    <a class="menu-bar-title" href="">LIÊN HỆ</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="bg-menu">
+            <img class="bg-menu-img" src="menu.jpg">
+        </div>
+
+    </header>
+    <div class="basket">
+        <div class="basket_container">
+            <div class="cart">
+                <div class="cart_container">
+                    <div class="header">Giỏ hàng của bạn</div>
+                    <div class="list">
+                        <ul class="cart_items">
+                            <li>
+                                <div class="item">
+                                    <input type="checkbox" class="checkbox">
+                                    <div class = "img_product">
+                                    <a href="#" >
+                                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpe95uh6h9XiwFs2nJse3jZcrDHtfc68V2Css3eyII8Q&s"
+                                        alt="sp">
+                                    </a>
+                                    </div>
+                                    <div class="item-info">
+                                        <div class="name">
+                                        <a href="#">
+                                        <div class="product-name">Vòng tay đá phong thủy hoa sen trắng phù hợp mệnh xinh
+                                            xắn thời trang</div>
+                                        </a>
+                                        </div>
+                                        <div class="product-decribe">(Màu: <input type="hidden" class="color">Trắng, Kích cỡ:<input type="hidden" class="size" value="17"> 17 )</div>
+                                        <div class="product-price">
+                                            <input type="hidden" class="price" value="300000">300.000đ</p>
+                                            <p class="number-input">
+                                                <input type="button" value="-" class="decrease_button">
+                                                <input type="number" id="item_quantity" class="quantity_values" name="quantity" value="1" aria-label="Product quantity" size="4" min="1" step="1" inputmode="numeric" autocomplete="off">
+                                                <input type="button" value="+" class="increase_button">
+                                            </p>
+                                            <span class="total">300.000đ</span>
+                                        </div>
+                                        <p class="remove"><i class="fa-solid fa-trash"></i> Xóa</p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="item">
+                                    <input type="checkbox" class="checkbox">
+                                    <div class = "img_product">
+                                    <a href="#" >
+                                        <img src="https://img.lazcdn.com/g/p/28fef8c7e4d69c27250e4fc8b6e6764b.png_960x960q80.png_.webp"
+                                        alt="sp">
+                                    </a>
+                                    </div>
+                                    <div class="item-info">
+                                        <div class="name">
+                                        <a href="#">
+                                        <div class="product-name">Vòng tay đá phong thủy đá thách anh vàng phù hợp mệnh xinh
+                                            xắn thời trang</div>
+                                        </a>
+                                        </div>
+                                        <div class="product-decribe">(Màu: <input type="hidden" class="color">Trắng, Kích cỡ:<input type="hidden" class="size" value="17"> 17 )</div>
+                                        <div class="product-price">
+                                            <input type="hidden" class="price" value="500000">500.000đ</p>
+                                            <p class="number-input">
+                                                <input type="button" value="-" class="decrease_button">
+                                                <input type="number" id="item_quantity" class="quantity_values" name="quantity" value="1" aria-label="Product quantity" size="4" min="1" step="1" inputmode="numeric" autocomplete="off">
+                                                <input type="button" value="+" class="increase_button">
+                                            </p>
+                                            <span class="total">500.000đ</span>
+                                        </div>
+                                        <p class="remove"><i class="fa-solid fa-trash"></i> Xóa</p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="item">
+                                    <input type="checkbox" class="checkbox">
+                                    <div class = "img_product">
+                                    <a href="#" >
+                                        <img src="https://bizweb.dktcdn.net/thumb/1024x1024/100/442/974/products/nqvt0366-vong-hai-lam-ngoc-phoi-charm-hai-san-1659k-8mm-1.jpg?v=1646725145203"
+                                        alt="sp">
+                                    </a>
+                                    </div>
+                                    <div class="item-info">
+                                        <div class="name">
+                                        <a href="#">
+                                        <div class="product-name">Vòng tay đá phong thủy aquamarin phoois charm phù hợp mệnh xinh
+                                            xắn thời trang</div>
+                                        </a>
+                                        </div>
+                                        <div class="product-decribe">(Màu: <input type="hidden" class="color">Trắng, Kích cỡ:<input type="hidden" class="size" value="17"> 17 )</div>
+                                        <div class="product-price">
+                                            <input type="hidden" class="price" value="1000000">1.000.000đ</p>
+                                            <p class="number-input">
+                                                <input type="button" value="-" class="decrease_button">
+                                                <input type="number" id="item_quantity" class="quantity_values" name="quantity" value="1" aria-label="Product quantity" size="4" min="1" step="1" inputmode="numeric" autocomplete="off">
+                                                <input type="button" value="+" class="increase_button">
+                                            </p>
+                                            <span class="total">1.000.000đ</span>
+                                        </div>
+                                        <p class="remove"><i class="fa-solid fa-trash"></i> Xóa</p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="info_container">
+                <div class="info">
+                    <p class="info_header">Thông tin đơn hàng</p>
+                    <hr>
+                    <div class="order_items">
+                    </div>
+                    <hr>
+                    <div class="total_container">
+                        <span>Tổng tiền</span>
+                        <span class="all_total">0đ</span>
+                    </div>
+                    <div class="discount_container">
+                        <input type="Input" name="discount" placeholder="Mã giảm giá...">
+                        <button class="apply_discount">
+                            <span class="discount_icon"><span class="streamline--discount-percent-coupon"></span></span>
+                            <b>Áp dụng</b>
+                        </button>
+                    </div>
+                    <div class="pay">
+                        <button class="pay_button">Thanh toán</button>
+                    </div>
+                    <div class="continue">
+                        <a href="#"><i class="fas fa-angle-double-left"></i> Tiếp tục mua hàng</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="footer_section">
+            <h3>Về chúng tớ</h3>
+            <a href="#">Trang chủ</a><br>
+            <a href="#">Sản phẩm</a><br>
+            <a href="#">Giới thiệu</a><br>
+            <a href="#">Liên hệ</a><br>
+        </div>
+        <div class="footer_section">
+            <h3>Theo dõi chúng tớ</h3>
+            <a href="#"><i class="fa-brands fa-facebook-f"></i>Facebook</a><br>
+            <a href="#"><i class="fa-brands fa-instagram"></i>Instagram</a><br>
+            <a href="#"><i class="fa-brands fa-tiktok"></i>Tiktok</a><br>
+        </div>
+        <div class="footer_section">
+            <h3>Liên hệ</h3>
+            <p><a href="mailto:Blinkiy.is334@gmail.com">Blinkiy.is334@gmail.com</a></p>
+            <p>Hotline: 0814576804</p>
+        </div>
+        <div class="footer_section">
+            <h3>Cửa hàng</h3>
+            <p>Trường Đại học Công nghệ Thông tin, Đại học Quốc gia, TP Hồ Chí Minh</p>
+        </div>
+    </footer>
+    <script>
+        
+        function updateAllTotal() {
+            const orderItems = document.querySelectorAll('.order_item');
+            let total = 0;
+            orderItems.forEach(item => {
+                const price = parseInt(item.querySelector('.order_price').textContent.replace(/\D/g, ''));
+                total += price;
+            });
+            document.querySelector('.all_total').textContent = total.toLocaleString('en-US') + 'đ';
+        }
+
+        function createOrderItemNode(product) {
+            const orderItem = document.createElement('div');
+            orderItem.className = 'order_item';
+            const productName = product.querySelector('.product-name').textContent;
+            const productDescription = product.querySelector('.product-decribe').textContent;
+            const productQuantity = product.querySelector('.quantity_values').value;
+            const productPrice = product.querySelector('.price').value;
+
+            orderItem.innerHTML = `
+                <div class="order_name">${productName}</div>
+                <div class="order_description">${productDescription}</div>
+                <div class="order_quantity">SL: ${productQuantity}</div>
+                <div class="order_price">Đơn giá: ${(productPrice * productQuantity).toLocaleString('en-US')}đ</div>
+            `;
+            return orderItem;
+        }
+
+        function updateOrderItemNode(product) {
+            const productName = product.querySelector('.product-name').textContent;
+            const productQuantity = product.querySelector('.quantity_values').value;
+            const productPrice = product.querySelector('.price').value;
+
+            const orderItems = document.querySelectorAll('.order_item');
+            orderItems.forEach(item => {
+                if (item.querySelector('.order_name').textContent === productName) {
+                    item.querySelector('.order_quantity').textContent = 'SL: ' +productQuantity;
+                    item.querySelector('.order_price').textContent ='Đơn giá: ' +(productPrice * productQuantity).toLocaleString('en-US') + 'đ';
+                }
+            });
+        }
+
+        document.querySelectorAll('.checkbox').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const product = this.closest('.item');
+                const orderContainer = document.querySelector('.order_items');
+                if (this.checked) {
+                    const orderItem = createOrderItemNode(product);
+                    orderContainer.appendChild(orderItem);
+                } else {
+                    const productName = product.querySelector('.product-name').textContent;
+                    const orderItems = document.querySelectorAll('.order_item');
+                    orderItems.forEach(item => {
+                        if (item.querySelector('.order_name').textContent === productName) {
+                            orderContainer.removeChild(item);
+                        }
+                    });
+                }
+                updateAllTotal();
+            });
+        });
+
+        document.querySelectorAll('.quantity_values').forEach(input => {
+            input.addEventListener('input', function() {
+                const product = this.closest('.item');
+                const pricePerItem = parseInt(product.querySelector('.price').value);
+                const quantity = parseInt(this.value) || 1; 
+                const totalElement = product.querySelector('.total');
+                totalElement.textContent = (pricePerItem * quantity).toLocaleString('en-US') + 'đ';
+                if (product.querySelector('.checkbox').checked) {
+                    updateOrderItemNode(product);
+                    updateAllTotal();
+                }
+            });
+        });
+
+        document.querySelectorAll('.decrease_button').forEach(button => {
+            button.addEventListener('click', function() {
+                const quantityInput = this.nextElementSibling;
+                let quantity = parseInt(quantityInput.value);
+                if (quantity > 1) {
+                    quantity--;
+                    quantityInput.value = quantity;
+                    quantityInput.dispatchEvent(new Event('input'));
+                }
+            });
+        });
+
+        document.querySelectorAll('.increase_button').forEach(button => {
+            button.addEventListener('click', function() {
+                const quantityInput = this.previousElementSibling;
+                let quantity = parseInt(quantityInput.value);
+                quantity++;
+                quantityInput.value = quantity;
+                quantityInput.dispatchEvent(new Event('input'));
+            });
+        });
+
+        document.querySelectorAll('.remove').forEach(removeButton => {
+            removeButton.addEventListener('click', function() {
+                const product = this.closest('.item');
+                const productName = product.querySelector('.product-name').textContent;
+                const orderContainer = document.querySelector('.order_items');
+                const checkbox = product.querySelector('.checkbox');
+                if (checkbox.checked) {
+                    const orderItems = document.querySelectorAll('.order_item');
+                    orderItems.forEach(item => {
+                        if (item.querySelector('.order_name').textContent === productName) {
+                            orderContainer.removeChild(item);
+                        }
+                    });
+                }
+                product.remove();
+                updateAllTotal();
+            });
+        });
+    </script>
+    
+</body>
+</html>

@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -74,29 +77,26 @@
     </header>
     <div class="process"> 
         <ul>
-            <ul>
-                <li class="current">Xem lại đơn hàng</li> >
-                <li class="current">Vận chuyển</li> >
-                <li class="current">Thông tin bổ sung</li> >
-                <li>Thanh toán</li>
-            </ul>
+            <li class="current">Vận chuyển</li> >
+            <li class="current">Thông tin bổ sung</li> >
+            <li>Thanh toán</li>
         </ul>
     </div>
     <div class="addition">
         <p class="addition_header">Thông tin bổ sung</p>
-        <form class="addition_form">
+        <form class="addition_form" method="POST" action="#" enctype="multipart/form-data">
                 <span id="header_1">Hãy cho chúng tôi biết yêu cầu đặc biệt của bạn về chiếc vòng nhé!</span>
                 <textarea id="mo_ta" name="mo_ta" rows="10" cols="100" placeholder="Chi tiết sản phẩm"></textarea><br>
                 <span id="header_2">Hình ảnh chi tiết yêu cầu của bạn</span>
                 <div class="img_input">
                     <label for="file_input" class="custom-file-upload">Chọn ảnh</label>
-                    <input type="file" id="file_input" style="display: none;">
-                    <span id="file_name">Chưa có ảnh nào được chọn</span>
+                    <input type="file" id="file_input" name="file_input">
+                    <a href="#" id="file_link"><p id="file_name">Chưa có ảnh nào được chọn</p></a>
                 </div>
                 <div class="return_container">
-                    <span><a href="van_chuyen.html" class="return">&lt; Quay lại</a></span>
+                    <span><a href="van_chuyen.php" class="return">&lt; Quay lại</a></span>
                 </div>
-                <button class="submit">Tiếp tục ></button>
+                <input type="Submit" class="submit" Value="Tiếp tục" name="Submit">
         </form>
     </div>
     <footer>
@@ -125,6 +125,53 @@
               </div>
         </div>
     </footer>
-      <script src="script_xem_lai.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#file_input').on('change', function() {
+                const fileInput = this;
+                const fileNameSpan = $('#file_name');
+                const fileLink = $('#file_link');
+
+                if (fileInput.files.length > 0) {
+                    const file = fileInput.files[0];
+                    fileNameSpan.text(file.name);
+                    fileLink.off('click').on('click', function(e) {
+                        e.preventDefault();
+                        const fileURL = URL.createObjectURL(file);
+                        const newWindow = window.open('fileDisplay.html');
+                        newWindow.onload = function() {
+                            newWindow.displayFile(fileURL, file.type, file.name);
+                        };
+                    });
+                } else {
+                    fileNameSpan.text('Chưa có ảnh nào được chọn');
+                    fileLink.attr('href', '#');
+                }
+            });
+        });
+    </script>
+    <?php
+        if (isset($_POST['Submit']) && $_POST['Submit'] == "Tiếp tục") {
+            $note = isset($_POST['mo_ta']) ? $_POST['mo_ta'] : '';
+            $file = isset($_FILES['file_input']) ? $_FILES['file_input'] : null;
+        
+            // Handle file upload
+            if ($file && $file['error'] == UPLOAD_ERR_OK) {
+                $uploadDir = 'uploads/';
+                if (!is_dir($uploadDir)) {
+                    mkdir($uploadDir, 0777, true);
+                }
+                $uploadFile = $uploadDir . basename($file['name']);
+                if (move_uploaded_file($file['tmp_name'], $uploadFile)) {
+                    $_SESSION['file_input'] = $uploadFile;
+                } else {
+                    echo "File upload failed!";
+                }
+            }
+        
+            $_SESSION['note'] = $note;
+            echo "<script>window.location.href = 'http://localhost:81/code/do_an/thanh_toan/thanh_toan.php';</script>";
+        }
+    ?>
 </body>
 </html>

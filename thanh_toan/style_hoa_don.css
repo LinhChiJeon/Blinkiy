@@ -4,7 +4,6 @@ body
     display: flex;
     flex-direction: column;
     font-family: 'DM Sans';
-    background-color: #f2f2f2;
 }
 /*Top-bar*/
 .top-bar
@@ -232,277 +231,83 @@ i.fa-user, i.fa-cart-shopping, i.fa-heart
     transition: all 0.5s ease-out;
 }
 
-.process {
-    display: flex;
-    max-width: 100%;
-    height: 15%;
-    margin-top: 0;
-}
-
-.process ul {
-    list-style-type: none;
-}
-
-.process ul li {
-    display: inline;
-    font-size: 20px;
-    font-style: Poly;
-    margin: 0 5px;
-    font-weight: bold;
-}
-
-.current {
-    color: rgba(239, 153, 162, 1);
-}
-
-.check_out {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    background-color: white;
-    border-radius: 10px;
-    padding: 1.217%;
-    max-width: 86%;
-    height: 100%;
-    margin: 4% auto;
-    font-family:'Times New Roman', Times, serif;
-}
-
-.confirm {
-    font-size: 20px;
-    flex: 3;
-    margin-left: 2%;
-}
-
-.confirm_header,
-.payment_opt_header {
-    font-size: 30px;
-    color:rgba(239, 153, 162, 1)
-}
-
-.confirm hr {
-    max-width: 100%;
-}
-
-.payment_opt {
-    display: flex;
-    flex-direction: column;
+.invoice {
+    font-family: 'Times New Roman', Times, serif;
+    width: 75%;
+    margin: 3% auto;
+    border: 1px solid #ddd;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     font-size: 20px;
 }
 
-input[type="radio"] {
-    width: 10%;
+.invoice h1 {
+    text-align: center;
+    color: #333;
 }
 
-.opt {
-    margin: 2% 0;
+.invoice_section {
+    margin-bottom: 20px;
 }
 
-.info_container {
-    flex: 4;
-    margin-left: 4%;
-    justify-self: center;
-    margin-top: 5%;
-    max-width: 70%;
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
+.invoice_section h2 {
+    font-size: 1.2em;
+    color: #666;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
 }
 
-.info {
-    margin: 2.537% auto;
-    background-color: white;
-    padding: 2.723%;
-    max-width: 100%;
-    height: auto;
-    border: 1px solid black;
-}
-
-.info hr {
-    width: 96%;
-}
-
-.items_list {
-    display: flex;
-    flex-direction: row;
-    margin: 1% auto;
-    padding: 3%;
+.invoice_section p {
+    font-size: 0.95em;
+    color: #555;
 }
 
 .item {
-    display: grid;
-    grid-template-columns: 20% 50% 25%;
-    grid-template-rows: 50% repeat(2, 12.5%) 25%;
-    grid-gap: 0 2%;
+    display: flex;
     align-items: center;
-    padding: 0;
-    margin: 0;
-    max-width: 100%;
-    height: auto;
-    text-align: center;
-}
-  
-.item img {
-    justify-self: center;
-    align-self: center;
-    grid-row: span 4;
-    width: 100%;
-    height: auto;
-    margin: 0;
-    padding: 0;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
 }
 
-.item p {
-    text-align: left;
+.item img {
+    width: 100px;
+    height: 100px;
+    margin-right: 20px;
 }
 
 .item_name {
-    grid-column: 2;
-    grid-row: span(2);
+    font-weight: bold;
+    color: #333;
+}
+
+.item_color, .item_size, .item_quantity, .item_total {
+    margin-left: 20px;
+}
+
+.item_color, .item_size, .item_quantity, .item_total {
+    font-size: 0.9em;
+    color: #777;
+}
+
+.invoice_section .item p {
     margin: 0;
+}
+
+.invoice_section .item p.item_name {
+    margin-bottom: 5px;
+}
+
+.invoice_section:last-child p {
+    font-size: 1em;
     font-weight: bold;
-    font-size: 18px;
+    color: #333;
 }
 
-.item_color {
-    grid-column: 2;
-    grid-row: 3;
-    margin: 0;
-    margin-bottom: 8px;
-}
-
-.item_size {
-    grid-column: 2;
-    grid-row: 4;
-    margin: 0;
-    margin-bottom: 8px;
-}
-
-.item_quantity {
-    grid-column: 3;
-    grid-row: 1;
-    border-right: 0;
-    border-left: 0;
-    text-align: center;
-    max-width: 100%;
-    background-color: white;
-    justify-self: end;
-}
-  
-.item_total {
-    grid-column: 3;
-    grid-row: 3;
-    justify-self: end;
-    align-self: end;
-    font-weight: bold;
-    color: black;
-}
-
-.fees {
-    display: flex;
-    flex-direction: column;
-    width: 90%;
-    height: auto;
-    align-items: center;
-    justify-content: space-between;
-    margin: 5% auto;
-    font-size: 20px;
-    font-weight: bold;
-    color: rgba(239, 153, 162, 1);
-}
-
-.items_total,
-.shipping_fee {
-    display: grid;
-    grid-template-columns: repeat(2, 50%);
-    width: 97%;
-    margin: 1.125% 0;
-}
-
-.total,
-.shipping {
-    text-align: right;
-}
-
-.sum_container {
-    display: grid;
-    grid-template-columns: repeat(2, 50%);
-    width: 90%;
-    height: auto;
-    align-self: center;
-    justify-self: center;
-    margin: 5% auto;
-    font-size: 25px;
-    font-weight: bold;
-    color: rgba(239, 153, 162, 1);
-}
-
-.sum {
-    text-align: right;
-    grid-column: 2;
-}
-
-.discount_container {
-    grid-row: 4;
-    display: grid;
-    grid-template-columns: 70% 30%;
-    margin: 3% 4%;
-    width: 100%;
-}
-
-.discount_container input {
-    flex-grow: 1;
-    padding: 3.5%;
-    border: 1px solid #ccc;
-    max-width: 100%;
-    height:auto;
-    border-radius: 5px 0 0 5px;
-}
-
-.discount_container button {
-    padding: 0;
-    background-color: white;
-    color: rgba(58, 70, 81, 1);
-    border: 1px solid rgba(58, 70, 81, 1);
-    cursor: pointer;
-    font-size: 12px;
-    max-width: 75%;
-    border-radius: 0 5px 5px 0;
-}
-
-.discount_container button:hover {
-    background-color: gray;
-}
-
-.discount_container .discount_icon {
-    margin-right: 15%;
-    width: 20%;
-    height: 40%;
-}
-
-.pay {
-    text-align: center;
-}
-
-.pay button {
-    margin-top: 2.5%;
-    padding: 3.2% 5%;
-    background-color: rgba(239, 153, 162, 1);
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    width: 90%;
-    height: auto;
-    font-size: 18px;
-}
-
-.pay button:hover {
-    background-color: #ec6ad2;
-}
-
-.pay button:active {
-    background-color: red;
+.invoice_section:last-child p:last-child {
+    font-size: 1.2em;
+    color: #e74c3c;
 }
 
 footer {
@@ -542,6 +347,7 @@ footer a:hover {
 .fa-brands {
     margin-right: 1.5%;
 }
+
 
 /* Mobile width < 740px */
 @media only screen and (max-width: 46.1875em)
@@ -664,102 +470,87 @@ footer a:hover {
         height: 30px;
         font-size: 10px;
     }
-    .process ul li {
-        font-size: 13.5px;
-    }
-
-    .check_out {
-        display: flex;
-        flex-direction: column;
-    }
-    
-    .confirm {
-        font-size: 13.5px;
-    }
-    
-    .confirm_header,
-    .payment_opt_header {
-        font-size: 20px;
-    }
-    
-    .payment_opt {
-        display: flex;
-        flex-direction: row;
-        font-size: 12px;
-        justify-content: space-between;
-    }
-
-    input[type="radio"] {
-        width: 6%;
-    }
-
-    .opt {
-        width: 33%;
-    }
-    
-    .info_container {
+    .invoice {
+        font-family: 'Times New Roman', Times, serif;
+        width: 75%;
         margin: 3% auto;
-        width: 90%;
+        border: 1px solid #ddd;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        font-size: 12px;
     }
     
-    .info {
-        margin: 2.537% auto;
-        padding: 2.723%;
+    .invoice h1 {
+        text-align: center;
+        color: #333;
     }
     
-    .item p {
-        text-align: left;
+    .invoice_section {
+        margin-bottom: 20px;
+    }
+    
+    .invoice_section h2 {
+        font-size: 1.2em;
+        color: #666;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 5px;
+        margin-bottom: 10px;
+    }
+    
+    .invoice_section p {
+        font-size: 0.95em;
+        color: #555;
+    }
+    
+    .item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 10px;
+    }
+    
+    .item img {
+        width: 100px;
+        height: 100px;
+        margin-right: 20px;
     }
     
     .item_name {
-        font-size: 14px;
+        font-weight: bold;
+        color: #333;
     }
     
-    .item_color {
-        font-size: 10px;
+    .item_color, .item_size, .item_quantity, .item_total {
+        margin-left: 20px;
     }
     
-    .item_size {
-        font-size: 10px;
+    .item_color, .item_size, .item_quantity, .item_total {
+        font-size: 0.9em;
+        color: #777;
     }
     
-    .item_quantity {
-        font-size: 10px;
-    }
-      
-    .item_total {
-        font-size: 10px;
+    .invoice_section .item p {
+        margin: 0;
     }
     
-    .fees {
-        font-size: 15px;
+    .invoice_section .item p.item_name {
+        margin-bottom: 5px;
     }
     
-    .sum_container {
-        font-size: 20px;
+    .invoice_section:last-child p {
+        font-size: 1em;
+        font-weight: bold;
+        color: #333;
     }
     
-    .sum {
-        text-align: right;
-        grid-column: 2;
+    .invoice_section:last-child p:last-child {
+        font-size: 1.2em;
+        color: #e74c3c;
     }
     
-    .discount_container input {
-        font-size: 10px;
-    }
-    
-    .discount_container button {
-        font-size: 10px;
-    }
-    
-    .pay button {
-        margin-top: 2.5%;
-        padding: 2.5% 2%;
-        width: 25%;
-        font-size: 12px;
-    }
-} 
 
+} 
 /* Tablet */
 @media only screen and (min-width: 46.25em) and (max-width: 63.9375em)
 {
@@ -893,90 +684,83 @@ footer a:hover {
         height: 45px;
         font-size: 17px;
     }
-    .process ul li {
-        font-size: 13.5px;
-    }
-
-    .check_out {
-        display: flex;
-        flex-direction: column;
-    }
-    
-    .confirm {
-        font-size: 14px;
-    }
-    
-    .confirm_header,
-    .payment_opt_header {
-        font-size: 23.5px;
-    }
-    
-    .payment_opt {
-        display: flex;
-        flex-direction: row;
-        font-size: 12.5px;
-        justify-content: space-between;
-    }
-
-    input[type="radio"] {
-        width: 6.5%;
-    }
-
-    .opt {
-        width: 33%;
-    }
-    
-    .info_container {
+    .invoice {
+        font-family: 'Times New Roman', Times, serif;
+        width: 75%;
         margin: 3% auto;
-        width: 90%;
-    }
-    
-    .info {
-        margin: 2.537% auto;
-        padding: 2.723%;
-    }
-    
-    .item_name {
+        border: 1px solid #ddd;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         font-size: 15px;
     }
     
-    .item_color {
-        font-size: 12px;
+    .invoice h1 {
+        text-align: center;
+        color: #333;
     }
     
-    .item_size {
-        font-size: 12px;
+    .invoice_section {
+        margin-bottom: 20px;
     }
     
-    .item_quantity {
-        font-size: 12px;
-    }
-      
-    .item_total {
-        font-size: 12px;
-    }
-    
-    .fees {
-        font-size: 17px;
+    .invoice_section h2 {
+        font-size: 1.2em;
+        color: #666;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 5px;
+        margin-bottom: 10px;
     }
     
-    .sum_container {
-        font-size: 23.5px;
+    .invoice_section p {
+        font-size: 0.95em;
+        color: #555;
     }
     
-    .discount_container input {
-        font-size: 12px;
+    .item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 10px;
     }
     
-    .discount_container button {
-        font-size: 12px;
+    .item img {
+        width: 100px;
+        height: 100px;
+        margin-right: 20px;
     }
     
-    .pay button {
-        margin-top: 2.5%;
-        padding: 2.5% 2%;
-        width: 40%;
-        font-size: 16.5px;
+    .item_name {
+        font-weight: bold;
+        color: #333;
+    }
+    
+    .item_color, .item_size, .item_quantity, .item_total {
+        margin-left: 20px;
+    }
+    
+    .item_color, .item_size, .item_quantity, .item_total {
+        font-size: 0.9em;
+        color: #777;
+    }
+    
+    .invoice_section .item p {
+        margin: 0;
+    }
+    
+    .invoice_section .item p.item_name {
+        margin-bottom: 5px;
+    }
+    
+    .invoice_section:last-child p {
+        font-size: 1em;
+        font-weight: bold;
+        color: #333;
+    }
+    
+    .invoice_section:last-child p:last-child {
+        font-size: 1.2em;
+        color: #e74c3c;
     }
     
 } 

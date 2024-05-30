@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -74,7 +77,6 @@
     </header>
     <div class="process"> 
         <ul>
-            <li class="current">Xem lại đơn hàng</li> >
             <li class="current">Vận chuyển</li> >
             <li>Thông tin bổ sung</li> >
             <li>Thanh toán</li>
@@ -83,7 +85,7 @@
     <div class="details">
         <p class="header_details">VẬN CHUYỂN</p>
         <p class="instruction">Hãy điền địa chỉ của bạn hoặc <a href="#log_in">Đăng nhập</a></p>
-        <form id="input_form" method="get" action="#">
+        <form id="input_form" method="POST" action="#">
             <table class="input_container">
                 <tr>
                     <td colspan="2">
@@ -103,7 +105,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <select id="city" name="city" required> 
+                        <select id="province" name="province" required> 
                             <option value="">Chọn tỉnh thành</option>
                             <?php
                                 include "conn.php"; 
@@ -113,19 +115,19 @@
                                     echo "<option value='".$t['MaTinh']."'>".$t['TenTinh']."</option>";
                                 }
                                 $connect->close();
-                            ?>           
+                            ?>
                         </select>
                     </td>
                     <td>
                         <select id="district" name="district" required>
-                            <option value="">Chọn quận huyện</option>
+                            <option value="">Chọn quận, huyện</option>
                         </select>
                     </td>
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <label for="street">Số nhà, đường:</label>
-                        <input type="text" id="street" name="street" required>
+                        <label for="address">Số nhà, đường, phường, xã:</label>
+                        <input type="text" id="address" name="address" required>
                     </td>
                 </tr>
                 <tr>
@@ -136,7 +138,7 @@
                 </tr>
                 <tr>
                     <td class="submit_button" align="center" colspan="2">
-                        <button class="submit">Tiếp tục</button>
+                        <input type="Submit" class="submit" Value="Tiếp tục" name="Submit">
                     </td>
                 </tr>
             </table>
@@ -168,40 +170,59 @@
               </div>
         </div>
     </footer>
-    <script src="script_van_chuyen.js">
-        const phoneInputField = document.querySelector("#phone_num");
-        const phoneInput = window.intlTelInput(phoneInputField, {
-            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
-        });
-        $(document).ready(function(){
-            $('#city').change(function(){
-        var city = $(this).val();
-        if(city){
-            $.ajax({
-                type: 'GET',
-                url: '',
-                data: {city: city, action: 'fetch_district'},
-                success: function(response){
-                    $('#district').html(response);
+
+    <script>
+        $(document).ready(function() {
+            $('#province').change(function() {
+                var province = $(this).val();
+                if (province) {
+                    $.ajax({
+                        type: 'POST',
+                        url: '',
+                        data: { province: province, action: 'fetch_district'},
+                        success: function(response) {
+                            $('#district').html(response);
+                        }
+                    });
+                } else {
+                    $('#district').html('<option value="">Chọn quận, huyện</option>');
                 }
             });
-        }else{
-            $('#district').html('<option value="">Chọn quận huyện</option>');
-        }   
         });
-    });
     </script>
+
     <?php
-        if(isset($_GET['action']) && $_GET['action'] == 'fetch_district'){
-            include "conn.php"; 
-            $maTinh = $_GET['city'];
+        if (isset($_POST['action']) && $_POST['action'] == 'fetch_district') {
+            include "conn.php";
+            $maTinh = $_POST['province'];
             $danhsachHuyen = $connect->query("SELECT * FROM HUYEN WHERE MaTinh = '$maTinh'");
-            echo '<option value="">Chọn phòng ban</option>';
-            while ($h = $danhsachHuyen->assoc()){
+            
+            echo '<option value="">Chọn quận, huyện</option>';
+            while ($h = $danhsachHuyen->fetch_assoc()) {
                 echo '<option value="'.$h['MaHuyen'].'">'.$h['TenHuyen'].'</option>';
             }
+            
             $connect->close();
-            exit;
+        }
+
+        if (isset($_POST['Submit']) && $_POST['Submit']=="Tiếp tục")
+        {
+            $hoten = $_POST['name'];
+            $email = $_POST['email'];
+            $sdt = $_POST['phone_num'];
+            $province = $_POST['province'];
+            $district = $_POST['district'];
+            $address = $_POST['address'];
+            $apartment = $_POST['apartment'];
+
+            $_SESSION['name'] = $hoten;
+            $_SESSION['email'] = $email;
+            $_SESSION['phone_num'] = $sdt;
+            $_SESSION['province'] = $province;
+            $_SESSION['district'] = $district;
+            $_SESSION['address'] = $address;
+            $_SESSION['apartment'] = $apartment;
+            echo "<script>window.open('http://localhost:81/code/do_an/bo_sung/bo_sung.php', '_self');</script>";
         }
     ?>
 </body>
