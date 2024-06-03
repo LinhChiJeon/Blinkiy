@@ -11,7 +11,7 @@ class ShippingController extends Controller
     public function index()
     {
         $provinces = DB::table('tinh')->get();
-        return view('pages.thanhtoan.shipping', compact('provinces'));
+        return view('pages.shipping', compact('provinces'));
     }
 
     public function fetchDistrict(Request $request)

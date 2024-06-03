@@ -20,7 +20,7 @@ class OrderController extends Controller
             return redirect()->route('thanh_toan')->with('error', 'Không tìm thấy hóa đơn.');
         }
 
-        return view('pages.thanhtoan.hoa_don', ['order' => $order]);
+        return view('pages.hoa_don', ['order' => $order]);
     }
 
     public function thanhToan()
@@ -40,7 +40,7 @@ class OrderController extends Controller
         // Lấy tên huyện
         $huyen = DB::table('HUYEN')->where('MaHuyen', $district)->value('TenHuyen');
 
-        return view('pages.thanhtoan.thanh_toan', compact('hoten', 'email', 'sdt', 'province', 'district', 'address', 'apartment', 'note', 'file', 'tinh', 'huyen'));
+        return view('pages.thanh_toan', compact('hoten', 'email', 'sdt', 'province', 'district', 'address', 'apartment', 'note', 'file', 'tinh', 'huyen'));
     }
 
     function execPostRequest($url, $data)

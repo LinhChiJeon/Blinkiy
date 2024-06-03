@@ -1,0 +1,58 @@
+footer {
+    background-color: #333;
+    color: white;
+    padding: 1%;
+}
+
+.section_container
+{
+    max-width: 96%;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    flex-direction: row;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.footer_section {
+    font-size: 18px;
+    text-align: left;
+    flex: 1;
+    max-width: 15%;
+}
+
+footer a {
+    color: inherit;
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: #cfe411;
+}
+
+.fa-brands {
+    margin-right: 1.5%;
+}
+
+/* Mobile width < 740px */
+@media only screen and (max-width: 46.1875em)
+{
+    h3 {
+        font-size: 11px
+    }
+    .footer_section {
+        font-size: 9.3px;
+    }
+} 
+/* Tablet */
+@media only screen and (min-width: 46.25em) and (max-width: 63.9375em)
+{
+    h3 {
+        font-size: 15px
+    }
+    .footer_section {
+        font-size: 14px;
+    }
+} 

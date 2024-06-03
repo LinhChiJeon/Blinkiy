@@ -12,6 +12,6 @@ class FileDisplayController extends Controller
         $fileType = $request->query('fileType');
         $fileName = $request->query('fileName');
 
-        return view('pages.thanhtoan.fileDisplay', compact('fileURL', 'fileType', 'fileName'));
+        return view('pages.fileDisplay', compact('fileURL', 'fileType', 'fileName'));
     }
 }
