@@ -63,7 +63,7 @@
             <td>{!!$post->post_desc!!}</td> 
             <!-- chuyen thanh html k bi loi -->
             <td>{{ $post->post_meta_keywords}}</td>
-            <td>{{ $post->cate_post->cate_post_name }}</td> <!--Lay ra ten danh muc thay vi id danh muc trong table cate_post, vì trường catepostname k có trong table post-->
+            <td>{{ $post->cate_post->cate_post_name }}</td> <!--Lay ra ten danh muc thay vi id danh muc trong table cate_post-->
             <td>
                 @if($post->post_status==0)
                     Hiển thị  

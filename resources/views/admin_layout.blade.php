@@ -135,6 +135,17 @@
 							<li><a href="{{URL::to('/contact_replied')}}">Liên hệ đã phản hồi</a></li> 
 						</ul>
 					</li>
+					<li class="sub-menu">
+						<a href="javascript:;">
+							<i class="fa fa-book"></i>
+							<span>Quản lý đơn hàng</span>
+						</a>
+						<ul class="sub">
+							<li><a href="{{URL::to('/order-not-process-yet')}}">Đơn hàng chưa xử lý</a></li>   
+							<li><a href="{{URL::to('/order-not-delivered-yet')}}">Đơn hàng chưa giao tới</a></li> 
+							<li><a href="{{URL::to('/order-delivered')}}">Đơn hàng đã được giao</a></li> 
+						</ul>
+					</li>
 					
 				</ul> 
 			</div>
@@ -170,15 +181,33 @@
 			// CKEDITOR.replace('ckeditor2');
 			// CKEDITOR.replace('ckeditor3');
 			// CKEDITOR.replace('id4');
-			$('#tomtat').summernote({
-				placeholder: 'tóm tắt bài viết',
-				tabsize: 2,
-				height: 100
-            });
 			$('#noidung').summernote({
-				placeholder: 'nội dung bài viết',
+                placeholder: 'nội dung bài viết',
+                tabsize: 2,
+                height: 100,
+				toolbar: [
+					['style', ['style']],
+					['font', ['bold', 'underline', 'clear']],
+					['color', ['color']],
+					['para', ['ul', 'ol', 'paragraph']],
+					['table', ['table']],
+					['insert', ['link', 'picture', 'video']],
+					['view', ['fullscreen', 'codeview', 'help']]
+				]
+            });
+			$('#tomtat').summernote({
+				placeholder: 'Tóm tắt bài viết',
 				tabsize: 2,
-				height: 400
+				height: 100,
+				toolbar: [
+					['style', ['style']],
+					['font', ['bold', 'underline', 'clear']],
+					['color', ['color']],
+					['para', ['ul', 'ol', 'paragraph']],
+					['table', ['table']],
+					['insert', ['link', 'picture', 'video']],
+					['view', ['fullscreen', 'codeview', 'help']]
+				]
             });
 			
 			

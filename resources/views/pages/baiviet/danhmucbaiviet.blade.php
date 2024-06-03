@@ -52,7 +52,7 @@
         <div class="section">
             <div class="news_header">
         <!--Code chinh -->
-                <h2><b>{{$catego_post->cate_post_name}}</b></h2>
+                <h2>{{$catego_post->cate_post_name}}</h2>
             </div>
 
             <div class="post_lists">
