@@ -1,4 +1,4 @@
-@extends('layouts.shipping_layout')
+@extends('layout.shipping_layout')
 @section('content')
     <div class="process">
         <div class="current"> Vận chuyển&nbsp; </div> >

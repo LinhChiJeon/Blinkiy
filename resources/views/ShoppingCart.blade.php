@@ -4,11 +4,14 @@
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link href="{{ asset('public/frontend/css/StyleShoppingCart.css') }}" rel="stylesheet">
     <title>Giỏ hàng | Blinkiy</title>
+    
 </head>
 
 <body>
@@ -89,7 +92,7 @@
                     <hr>
                     <div class="order_items">
                     </div>
-                    {{-- <hr> --}}
+                    <hr>
                     <div class="total_container">
                         <span class="total_title">Tổng tiền</span>
                         <span class="all_total">0đ</span>
@@ -113,7 +116,12 @@
         </div>
     </div>
 
-
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    
     <script src="{{ asset('public/frontend/js/ScriptShoppingCart.js') }}"></script>
     <script>
         function DeleteCart(cart) {
@@ -197,6 +205,52 @@
             ->update(['cart_quantity' => $quantity]);
     }
     ?>
+    <script>
+        $(document).ready(function() {
+            $('.pay_button').on('click', function(e) {
+                e.preventDefault();
+                saveCart();
+            });
+        });
+    
+        function saveCart() {
+            let cartData = [];
+            $('.item').each(function() {
+                let product = {
+                    product_id: $(this).find('.product-id').val(),
+                    product_name: $(this).find('.product-name').text().trim(),
+                    product_price: $(this).find('.price').val(),
+                    product_quantity: $(this).find('.quantity_values').val(),
+                    product_color: $(this).find('.color').text().trim(),
+                    product_size: $(this).find('.size').val(),
+                    product_size_value: $(this).find('.product-decribe').text().trim()
+                };
+                cartData.push(product);
+            });
+    
+            $.ajax({
+                type: 'POST',
+                url: "{{ route('cart.save') }}",
+                data: {
+                    cart: cartData,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(response) {
+                    if (response.success) {
+                        if (response.redirect) {
+                            window.location.href = response.redirect;
+                        }
+                    } else {
+                        console.error('Error:', response.error);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('AJAX Error: ' + status + error);
+                }
+            });
+        }
+    </script>
+    
 </body>
 
 </html>

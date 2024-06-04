@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layout.app')
 
 @section('content')
 <div class="process">
@@ -42,11 +42,11 @@
         <div class="payment_opt">
             <div class="opt">
                 <input type="radio" id="momo" name="pttt" value="1">
-                <label for="momo">Thanh toán bằng MoMo</label>
+                <label for="momo">Thanh toán bằng MoMo QR Code</label>
             </div>
             <div class="opt">
                 <input type="radio" id="bank" name="pttt" value="2">
-                <label for="bank">Thanh toán bằng ngân hàng</label>
+                <label for="bank">Thanh toán bằng MoMo ATM</label>
             </div>
             <div class="opt">
                 <input type="radio" id="tien_mat" name="pttt" value="3">
@@ -57,21 +57,26 @@
 
     <div class="info_container">
         <div class="info">
+            <p class="info_header">Thông tin đơn hàng</p>
+                    <hr>
             <div class="items_list">
+                @foreach ($cart as $item)
                 <div class="item">
-                    <img src="/xampp/htdocs/code/do_an/pics/Rectangle 85.png" alt="Vòng tay hạt cườm xinh xắn (Mẫu 1)">
-                    <p class="item_name">Vòng tay hạt cườm xinh xắn (Mẫu 1)</p>
-                    <p class="item_color">Màu: Trắng</p>
-                    <p class="item_size">Kích cỡ: 17</p>
-                    <p class="item_quantity">1</p>
-                    <p class="item_total">18,000 ₫</p>
+                    {{-- <img src="{{ $item['image'] }}" alt="{{ $item['name'] }}"> --}}
+                    <p class="item_name">{{ $item['product_name'] }}</p>
+                    <p class="item_color">Màu: {{ $item['product_color'] }}</p>
+                    <p class="item_size">Kích cỡ: {{ $item['product_size'] }}</p>
+                    <p class="product_quantity">{{ $item['product_quantity'] }}</p>
+                    <p class="item_total">{{ number_format($item['product_price'] * $item['product_quantity'], 0, ',', '.') }} ₫</p>
+                    <p></p>
                 </div>
+                @endforeach
             </div>
             <div class="fees">
                 <hr>
                 <div class="items_total">
                     <span class="total_header">Thành tiền</span>       
-                    <span class="total">0</span>
+                    <span class="total">{{ number_format($total, 0, ',', '.') }} ₫</span>
                 </div>
                 <div class="shipping_fee">
                     <span class="shipping_header">Phí giao hàng</span> 
@@ -81,7 +86,7 @@
             </div>
             <div class="sum_container">
                 <span>Tổng tiền</span> 
-                <span class="sum" name="sum">0</span>
+                <span class="sum" name="sum">{{ number_format($total, 0, ',', '.') }} ₫</span>
             </div>
             <div class="discount_container">
                 <input type="Input" name="discount" placeholder="Mã giảm giá...">
@@ -91,7 +96,6 @@
             </div>
             <div class="pay">
                 <button type="submit" class="pay_button" name="submit_payment">Thanh toán</button>
-                <button type="submit" class="pay_button" name="payUrl">Thanh toán MoMo</button>
             </div>
         </div>
     </div>

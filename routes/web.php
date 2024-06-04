@@ -85,9 +85,6 @@ Route::get('/add-gallery/{product_id}', [GalleryController::class, 'add_Gallery'
 Route::post('/insert-gallery/{product_id}', [GalleryController::class, 'insert_Gallery']);
 Route::get('/delete-gallery/{gallery_id}', [GalleryController::class, 'delete_Gallery']);
 
-// Giỏ hàng
-Route::get('/gio-hang', [CartController::class, 'shopping_cart']);
-
 // Danh mục bài viết 
 Route::get('/add-category-post', [CategoryPost::class, 'add_category_post']);
 Route::post('/save-category-post', [CategoryPost::class, 'save_category_post']);
@@ -157,6 +154,12 @@ Route::get('/file-display', [FileDisplayController::class, 'index'])->name('file
 Route::get('/shipping', [ShippingController::class, 'index'])->name('shipping.index');
 Route::post('/shipping/fetch-district', [ShippingController::class, 'fetchDistrict'])->name('shipping.fetch_district');
 Route::post('/shipping/store', [ShippingController::class, 'store'])->name('shipping.store');
+
+// Giỏ hàng
+Route::get('/gio-hang', [CartController::class, 'shopping_cart']);
+Route::post('/save-cart', [CartController::class, 'save_cart'])->name('cart.save');
+
+
 
 // Gửi email
 Route::get('/test-email', [EmailController::class, 'testEmail']);

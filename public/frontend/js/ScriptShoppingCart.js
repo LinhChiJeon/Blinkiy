@@ -195,6 +195,50 @@ document.querySelectorAll('.remove').forEach(removeButton => {
         }
     });
 });
+$(document).ready(function() {
+    $('.pay_button').on('click', function(e) {
+        e.preventDefault();
+        saveCart();
+    });
+});
+
+function saveCart() {
+    let cartData = [];
+    $('.item').each(function() {
+        let product = {
+            product_id: $(this).find('.product-id').val(),
+            product_name: $(this).find('.product-name').text().trim(),
+            product_price: $(this).find('.price').val(),
+            product_quantity: $(this).find('.quantity_values').val(),
+            product_color: $(this).find('.color').text().trim(),
+            product_size: $(this).find('.size').val(),
+            product_size_value: $(this).find('.product-decribe').text().trim()
+        };
+        cartData.push(product);
+    });
+
+    $.ajax({
+        type: 'POST',
+        url: saveCartUrl,
+        data: {
+            cart: cartData,
+            _token: csrfToken
+        },
+        success: function(response) {
+            if (response.success) {
+                if (response.redirect) {
+                    window.location.href = response.redirect;
+                }
+            } else {
+                console.error('Error:', response.error);
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error('AJAX Error: ' + status + error);
+        }
+    });
+}
+
 
 
 
