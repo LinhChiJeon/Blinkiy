@@ -1,17 +1,13 @@
-/* Ghi đè font-family của Bootstrap */
-body {
-    font-family: "Times New Roman", Times, serif !important;
-}
-
 body
 {
+    /* background-color: #F8F8F8; */
     margin-left: 0;
     margin-right: 0;
     margin-top: 0;
     margin-bottom: 0;
     display: flex;
     flex-direction: column;
-    font-family: 'DM Sans';
+    
 }
 /*Top-bar*/
 .top-bar
@@ -24,6 +20,10 @@ body
     background-color: #FDFDFB;
     display: grid;
     grid-template-columns: 20% 45% 35%;
+}
+.top-bar a
+{
+    text-decoration: none !important;
 }
 .logo
 {
@@ -56,7 +56,7 @@ body
     margin-top: 29px;
     font-size: 18px;
     color: #DAB076;
-    font-weight: medium;
+    font-weight: bold;
 }
 
 /*SEARCH BAR*/
@@ -141,15 +141,21 @@ i.fa-user, i.fa-cart-shopping, i.fa-heart
     display: grid;
     grid-template-columns: 20% 70%;
 }
-.top-bar-options-object-title:hover
+.top-bar-options-object:hover .fa-cart-shopping,
+.top-bar-options-object:hover .top-bar-options-object-title,
+.top-bar-options-object:hover .fa-heart,
+.top-bar-options-object:hover .top-bar-options-object-title,
+.top-bar-options-object:hover .fa-user,
+.top-bar-options-object:hover .top-bar-options-object-title
 {
     color: #DAB076;
 }
 .top-bar-options-object-title
 {
+    font-family: 'Paytone One', sans-serif;
     color: #d4868d;
     text-decoration: none;
-    font-weight: bold;
+    font-weight: light;
     font-size: 19px;
 }
 /* MENU BAR */
@@ -185,6 +191,7 @@ i.fa-user, i.fa-cart-shopping, i.fa-heart
 }
 .menu-bar-title
 {
+    font-family: 'Paytone One', sans-serif;
     display: block;
     text-decoration: none;
     height: 75px;
@@ -192,8 +199,9 @@ i.fa-user, i.fa-cart-shopping, i.fa-heart
     align-items: center;
     justify-content: center;
     color: white;
-    font-weight: bold;
+    font-weight: 500;
     font-size: 23px;
+    letter-spacing: 1.25px;
     text-align: center;
 }
 .mainmenu a:hover
@@ -207,21 +215,21 @@ i.fa-user, i.fa-cart-shopping, i.fa-heart
 .mainmenu-li:hover .product-submenu 
 {
     display: block;
-    max-height: 200px;
+    max-height: 400px;
     
 }
 .product-submenu a
 {
+    font-family: 'Paytone One', sans-serif;
     display: block;
     text-decoration: none;
     height: 50px;
-    font-size: 18px;
-    font-weight: bold;
+    font-size: 16px;
     display: flex;
     align-items: center;
     justify-content: left;
     padding-left: 20px;
-
+    font-weight: 50;
     color: #706c6b;
 }
 .product-submenu a:hover
@@ -232,7 +240,9 @@ i.fa-user, i.fa-cart-shopping, i.fa-heart
 .product-submenu
 {
     background-color: #ffffff;
-    opacity: 0.8;
+    opacity: 0.9;
+    border: 0.5px solid #DAB076;
+    border-top: none;
     overflow: hidden;
     max-height: 0;
     -webkit-transition: all 0.5s ease-out;
@@ -496,101 +506,3 @@ i.fa-user, i.fa-cart-shopping, i.fa-heart
         font-size: 17px;
     }
 } 
-
-
-/* SECTION */
-.btn-more {
-    background-color: #b84c65;
-    /* Màu nền */
-    border-color: #b84c65;
-    /* Màu viền */
-    color: #fff;
-    /* Màu chữ */
-    border-radius: 5px;
-    /* Bo góc */
-    padding: 8px 16px;
-    /* Kích thước nội dung */
-    font-size: 16px;
-    /* Kích thước chữ */
-    cursor: pointer;
-    /* Con trỏ chuột khi hover */
-    transition: background-color 0.3s, border-color 0.3s, color 0.3s;
-    /* Thời gian chuyển đổi */
-}
-
-
-.btn-register{
-    background-color: #F1A4AC;
-    /* Màu nền */
-    border-color: #F1A4AC;
-    /* Màu viền */
-    color: #fff;
-    /* Màu chữ */
-    border-radius: 5px;
-    /* Bo góc */
-    padding: 8px 16px;
-    /* Kích thước nội dung */
-    font-size: 16px;
-    /* Kích thước chữ */
-    cursor: pointer;
-    /* Con trỏ chuột khi hover */
-    transition: background-color 0.3s, border-color 0.3s, color 0.3s;
-    /* Thời gian chuyển đổi */
-}
-
-.btn-more:hover, .btn-register:hover {
-    background-color: #ff8592;
-    /* Màu nền khi hover */
-    border-color: #ff8592;
-    /* Màu viền khi hover */
-    color: #fff;
-    /* Màu chữ khi hover */
-}
-
-.regist_title {
-    color: #DAB076;
-    font-family: 'Paytone One', sans-serif;
-    letter-spacing: 1.5px;
-    font-weight: medium;
-    font-size: 22px;
-}
-
-.form-control {
-    border: 1px solid #DAB076;
-}
-
-
-.login-form{
-    padding: 20px;
-    border: 1px solid #d3ced2;
-    margin: 25px 0;
-    text-align: left;
-    border-radius: 5px;
-}
-
-.register-form{
-    padding: 20px;
-    border: 1px solid #d3ced2;
-    margin: 25px 0;
-    text-align: left;
-    border-radius: 5px;
-}
-p.text-alert {
-    color: red;
-    font-size: 14px;
-    width: 100%;
-    /* text-align: center; */
-    font-weight: bold;
-}
-
-.form-group{
-    margin-bottom: 1.2rem ;
-    font-family: 'Paytone One', sans-serif;
-    font-size: 15px;
-    font-weight: lighter;
-}
-
-.alert-danger {
-    margin-top: 15px;
-    margin-bottom: 0px;
-}
