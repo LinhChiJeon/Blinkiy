@@ -1,0 +1,452 @@
+/*Top-bar*/
+.top-bar
+{
+    width: 100%;
+    max-width: 1920px;
+    height: 85px;
+    display: flex;
+    align-items: center;
+    background-color: #3E2929;
+    display: grid;
+    grid-template-columns: 20% 47% 33%;
+}
+.logo
+{
+height: 80px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.logo-img
+{
+  flex: 1.3;
+  max-width: 25%;
+  padding-left: 15%;
+}
+.logo-child-2{
+flex: 1;
+padding-left: 2%;
+}
+.logo-blinkiy
+{ 
+  font-size: 25px;
+  margin-bottom: 0px;
+  color: #EF99A2;
+}
+.logo-phongthuy
+{
+  margin-top: 0;
+  font-size: 20px;
+  color: #DAB076;
+}
+
+/*SEARCH BAR*/
+.search_bar{
+  height: 55px;
+  width: 70%;
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 20px;
+}
+.search_box{    
+  flex: 1;
+  border: solid 1px;
+  height: 100%;
+  border-radius: 0px 8px 8px 0px;
+  font-size: 20px;
+  padding-left: 10px;
+}
+.search_icon{
+  height: 20px;
+  width: auto;
+}
+.search_button{
+  height: 107%;
+  width: 45px;
+  background-color: white;
+  border: solid 1px;
+  border-radius: 8px 0px 0px 8px;
+}
+
+i.fa-search
+{
+    font-size: 20px;
+    margin-top: 0;
+    border-radius: 5px 0px 0px 5px;
+    height: 30px;
+    width: 100%;
+    background-color: #EBE9E9;
+    border: 1px solid #373737;
+    color: #373737;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/*TOP BAR OPTIONS*/
+.top-bar-options
+{
+    height: 35px;
+    width: 100%;
+    display: flex;
+    align-items: end;
+    margin-bottom: 5px;
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+}
+i.fa-user, i.fa-cart-shopping, i.fa-heart
+{
+    color: #F7ECDB;
+    font-size: 21px;
+}
+.top-bar-options-object
+{
+    display: flex;
+    align-items: center;
+    display: grid;
+    grid-template-columns: 20% 70%;
+}
+.top-bar-options-object-title:hover
+{
+    color: #DAB076;
+}
+.top-bar-options-object-title
+{
+    text-decoration: none;
+    font-weight: bold;
+    color: #F7ECDB;
+    font-size: 20px;
+
+}
+
+
+/* MENU BAR */
+.menu-bar
+{
+    width: 100%;
+    max-width: 1920px;
+    display: grid;
+    /* grid-template-rows: 0px; */
+    /* order: 2; */
+}
+.mainmenu, .product-submenu
+{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.mainmenu
+{
+    z-index: 1;
+    background: rgba(112, 90, 87, 0.37);
+    height: 75px;
+    display: grid;
+    grid-template-columns: 20% 20% 20% 20% 20%;
+    /* backdrop-filter: blur(2px); */
+}
+.menu-bar-title
+{
+    display: block;
+    text-decoration: none;
+    height: 75px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-size: 23px;
+    text-align: center;
+}
+.mainmenu a:hover
+{
+    color: #452525;
+}
+.mainmenu-li
+{
+    height: 75px;
+}
+.mainmenu-li:hover .product-submenu 
+{
+    display: block;
+    max-height: 200px;
+    
+}
+.product-submenu a
+{
+    display: block;
+    text-decoration: none;
+    height: 50px;
+    font-size: 22px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    padding-left: 20px;
+
+    color: white;
+    border: 1px solid #DAB076;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+}
+.product-submenu a:hover
+{
+    color: #452525;
+}
+.product-submenu
+{
+    background: rgba(176, 169, 168, 0.37);
+    overflow: hidden;
+    max-height: 0;
+    -webkit-transition: all 0.5s ease-out;
+    transition: all 0.5s ease-out;
+}
+
+
+/* Mobile width < 740px */
+@media only screen and (max-width: 46.1875em)
+{
+    .top-bar
+    {
+        width: 100%;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        background-color: #3E2929;
+        display: grid;
+        grid-template-columns: 22% 38% 40%;
+    }
+    .logo
+    {
+        height: 15px;
+        display: grid;
+        grid-template-columns: 40% 0% 60%;
+    }
+    /* .logo-img
+    {
+        width: 55%;
+        height: auto;
+        margin-top: -1.5px;
+        margin-left: 30%;
+    } */
+    .logo-blinkiy
+    {
+        margin-top: 0.1px;
+        font-size: 9px;
+    }
+    .logo-phongthuy
+    {
+        margin-top: 10px;
+        font-size: 6px;
+        color: #DAB076;
+    }
+    /*SEARCH BAR*/
+    .search-bar
+    {
+        /* background-color: aqua; */
+        height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        display: grid;
+        grid-template-columns: 10% 90%;
+       
+    }
+    .search-bar-input
+    {
+        border: 0.5px solid #373737;
+        width: 85%;
+        height: 12px;
+        line-height: 12px;
+        border-radius: 0px 3px 3px 0px;
+        text-indent: 3px;
+        font-size: 6px;
+    }
+    .search-bar-input::placeholder
+    {
+        line-height: normal; 
+        font-size: 6px;
+    }
+    i.fa-search
+    {
+        border: 0.5px solid #373737;
+        font-size: 6px;
+        height: 12px;
+        border-radius: 3px 0px 0px 3px;
+        width: 100%;
+    }
+    .top-bar-options
+    {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        display: grid;
+        grid-template-columns: 33% 33% 33%;
+    }
+    i.fa-user, i.fa-cart-shopping, i.fa-heart
+    {
+        margin-top: 5px;
+        color: #F7ECDB;
+        font-size: 6.5px;
+    }
+    .top-bar-options-object-title
+    {
+        margin-top: 5px;
+        margin-bottom: 0;
+        color: #F7ECDB;
+        font-size: 8px;
+    }
+    .top-bar-options-object
+    {
+        display: grid;
+        grid-template-columns: 20% 80%;
+        
+    }
+    /* MENU BAR */
+    .mainmenu
+    {
+        z-index: 1;
+        height: 40px;
+        /* backdrop-filter: blur(2px); */
+    }
+    .menu-bar-title
+    {
+        height: 40px;
+        font-size: 10px;
+    }
+    .mainmenu-li
+    {
+        height: 40px;
+    }
+    .product-submenu a
+    {
+        height: 30px;
+        font-size: 10px;
+    }
+} 
+/* Tablet */
+@media only screen and (min-width: 46.25em) and (max-width: 63.9375em)
+{
+    .top-bar
+    {
+        width: 100%;
+        height: 70px;
+        display: grid;
+        grid-template-columns: 22% 40% 38%;
+    }
+    .logo
+    {
+        height: 70px;
+        display: flex;
+        align-items: center;
+        display: grid;
+        grid-template-columns: 40% 0% 60%;
+    }
+    /* .logo-img
+    {
+        margin-top: 4px;
+        width: 55%;
+        height: auto;
+        margin-left: 30%;
+    } */
+    .logo-blinkiy
+    {
+        margin-top: 0.5px;
+        font-size: 14px;
+    }
+    .logo-phongthuy
+    {
+        margin-top: 34px;
+        font-size: 13px;
+        color: #DAB076;
+    }
+    /*SEARCH BAR*/
+    .search-bar
+    {
+        /* background-color: aqua; */
+        height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        display: grid;
+        grid-template-columns: 8% 92%;
+       
+    }
+    .search-bar-input
+    {
+        border: 0.5px solid #373737;
+        width: 85%;
+        height: 23px;
+        line-height: 12px;
+        border-radius: 0px 4px 4px 0px;
+        text-indent: 3px;
+        font-size: 10px;
+    }
+    .search-bar-input::placeholder
+    {
+        line-height: normal; 
+        font-size: 10px;
+    }
+    i.fa-search
+    {
+        border: 0.5px solid #373737;
+        font-size: 9px;
+        height: 23px;
+        border-radius: 4px 0px 0px 4px;
+        width: 100%;
+    }
+    .top-bar-options
+    {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        display: grid;
+        grid-template-columns: 33% 33% 33%;
+    }
+    i.fa-user, i.fa-cart-shopping, i.fa-heart
+    {
+        margin-top: 5px;
+        color: #F7ECDB;
+        font-size: 15px;
+    }
+    .top-bar-options-object-title
+    {
+        margin-top: 5px;
+        margin-bottom: 0;
+        color: #F7ECDB;
+        font-size: 15px;
+    }
+    .top-bar-options-object
+    {
+        display: grid;
+        grid-template-columns: 20% 80%;
+        
+    }
+    /* MENU BAR */
+    .mainmenu
+    {
+        z-index: 1;
+        height: 60px;
+        /* backdrop-filter: blur(2px); */
+    }
+    .menu-bar-title
+    {
+        height: 60px;
+        font-size: 17px;
+    }
+    .mainmenu-li
+    {
+        height: 60px;
+    }
+    .product-submenu a
+    {
+        height: 45px;
+        font-size: 17px;
+    }
+}

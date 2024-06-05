@@ -1,0 +1,93 @@
+{{-- @section('Header') --}}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{{ asset('public/frontend/css/StyleHeaderOnly.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@400;700&family=Francois+One&family=Paytone+One&family=Sigmar&family=Tilt+Neon&family=Saira+Stencil+One&display=swap" rel="stylesheet">
+  
+
+    <header class="Header">
+        <div class="top-bar">
+            <a href="{{ URL::to('/trang-chu') }}">
+                <div class="logo">
+                    <img class="logo-img" src="{{ asset('public/frontend/images/Logo.jpg') }}">
+                    <p class="logo-blinkiy">BLINKIY</p>
+                    <p class="logo-phongthuy">PHONG THỦY</p>
+                </div>
+            </a>
+            <div class="search-bar">
+                <div class="search-bar-cover">
+                    <i class="fas fa-search"></i>
+                    <input type="input" class="search-bar-input" id="search-bar-input" name="search-bar-input"
+                        placeholder="Tìm kiếm" />
+                </div>
+            </div>
+            <div class="top-bar-options">
+                <div class="top-bar-options-object">
+                    <a href="{{ URL::to('/personal_infor') }}">
+                        <i class="fa-solid fa-user"></i>
+                    </a>
+                    <a class="top-bar-options-object-title" href="{{ URL::to('/personal_infor') }}">Tài khoản</a>
+                </div>
+                <div class="top-bar-options-object">
+                    <a href="">
+                        <i class="fa-solid fa-heart"></i>
+                    </a>
+                    <a class="top-bar-options-object-title" href="">Yêu thích</a>
+                </div>
+                <div class="top-bar-options-object">
+                    <a href="{{ URL::to('/gio-hang') }}">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                    </a>
+                    <a class="top-bar-options-object-title" href="{{ URL::to('/gio-hang') }}">Giỏ hàng</a>
+                </div>
+            </div>
+        </div>
+
+        <nav class="menu-bar">
+            <ul class="mainmenu">
+                <li class="mainmenu-li">
+                    <a href="{{ URL::to('/trang-chu') }}" class="menu-bar-title">TRANG CHỦ</a>
+                </li>
+                <li class="mainmenu-li">
+                    <a class="menu-bar-title" href="{{ URL::to('/san-pham') }}">SẢN PHẨM</a>
+                    <ul class="product-submenu">
+                        @foreach ($category_product_header as $key => $cate)
+                            <li><a
+                                    href="{{ URL::to('/danh-muc-san-pham/' . $cate->category_id) }}">{{ $cate->category_name }}</a>
+                            </li>
+                        @endforeach
+                    </ul>
+                </li>
+                <li class="mainmenu-li">
+                    <a class="menu-bar-title" href="">GIỚI THIỆU</a>
+                </li>
+                <li class="mainmenu-li">
+                    <a class="menu-bar-title" href="{{ URL::to('/tat-ca-bai-viet') }}">BLOG</a>
+                    <ul class="product-submenu">
+                        @foreach ($category_post_header as $key => $cate)
+                            <li><a
+                                    href="{{ URL::to('/danh-muc-bai-viet/' . $cate->cate_post_slug) }}">{{ $cate->cate_post_name }}</a>
+                            </li>
+                        @endforeach
+                    </ul>
+                </li>
+                <li class="mainmenu-li">
+                    <a class="menu-bar-title" href="{{ URL::to('/contact') }}">LIÊN HỆ</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="bg-menu">
+            {{-- <img class="bg-menu-img" src="menu.jpg"> --}}
+            <img class="bg-menu-img" alt="" src="{{ asset('public/frontend/images/menu.jpg') }}">
+        </div>
+
+    </header>
+
+{{-- @endsection --}}
+{{-- @extends('ShoppingCard') --}}
+
+{{-- 
+</body>
+</html> --}}

@@ -1,0 +1,35 @@
+table, tr{
+    width: 100%;
+}
+.order_STT, .order_Ma{
+    width: 5%;
+    text-align: center;
+}
+.order_Ten, .order_Thoigian{
+    width: 10%;
+    text-align: center;
+}
+.order_SDT{
+    width: 10%;
+    text-align: center;
+}
+.order_Trangthai{
+    width: 10%;
+    text-align: center;
+}
+.order_Email, .order_Hoatdong{
+    width: 10%;
+    text-align: center;
+}
+.order_Diachi{
+    width: 20%;
+    text-align: center;
+}
+.order_Tongtien{
+    width: 10%;
+    text-align: center;
+}
+.panel-body th{
+    border-bottom:1px solid black;
+
+}
