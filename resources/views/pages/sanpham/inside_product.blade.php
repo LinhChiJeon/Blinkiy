@@ -137,7 +137,7 @@
                     {{-- <p id="test_text">test nè</p> --}}
                     <div class="button_container">
                         <div class="addtocart_container">
-                            <form method="GET">
+                            <form action="/add-to-cart" method="GET">
                                 {{ csrf_field() }}
                                 {{-- @csrf --}}
                                 <button type="button" id="add_product_to_cart" onclick="addToCart()">

@@ -97,13 +97,6 @@
                         <span class="total_title">Tổng tiền</span>
                         <span class="all_total">0đ</span>
                     </div>
-                    <div class="discount_container">
-                        <input type="Input" name="discount" placeholder="Mã giảm giá...">
-                        <button class="apply_discount">
-                            <span class="discount_icon"><span class="streamline--discount-percent-coupon"></span></span>
-                            <b>Áp dụng</b>
-                        </button>
-                    </div>
 
                     <div class="pay">
                         <button class="pay_button">Thanh toán</button>
@@ -116,11 +109,11 @@
         </div>
     </div>
 
-    $.ajaxSetup({
+    {{-- $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
-    });
+    }); --}}
     
     <script src="{{ asset('public/frontend/js/ScriptShoppingCart.js') }}"></script>
     <script>
@@ -250,7 +243,46 @@
             });
         }
     </script>
-    
+    <script>
+        $(document).ready(function() {
+            // Hàm để cập nhật dữ liệu giỏ hàng từ session vào HTML
+            updateCartFromSession();
+        });
+        
+        function updateCartFromSession() {
+            // Lấy dữ liệu giỏ hàng từ session
+            let sessionCart = @json(Session::get('cart', []));
+            
+            // Duyệt qua dữ liệu giỏ hàng từ session và cập nhật vào HTML
+            sessionCart.forEach(function(item) {
+                // Tìm các phần tử sản phẩm tương ứng trong HTML
+                let productElement = $('.item').filter(function() {
+                    return $(this).find('.product-id').val() == item.product_id &&
+                           $(this).find('.size').val() == item.size_id;
+                });
+                // Nếu sản phẩm được tìm thấy trong HTML, cập nhật số lượng
+                if (productElement.length > 0) {
+                    let quantity = parseInt(item.product_quantity);
+                    productElement.find('.quantity_values').val(quantity);
+                    productElement.find('.total').text(formatCurrency(quantity * item.product_price));
+                }
+            });
+        }
+        
+        function formatCurrency(value) {
+            // Hàm định dạng số tiền sang chuỗi có dấu phân cách hàng nghìn
+            return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(value);
+        }
+        </script>
+        <script>
+            $(document).ready(function() {
+                $('.pay_button').on('click', function(e) {
+                    e.preventDefault();
+                    window.location.href = "{{ route('shipping.index') }}";
+                });
+            });
+        </script>
+                
 </body>
 
 </html>

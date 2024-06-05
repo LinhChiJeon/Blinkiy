@@ -9,7 +9,6 @@ use App\Http\Controllers\CategoryPost;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\SendEmailController;
 use App\Http\Controllers\ContactController;
-use App\Http\Controllers\OrderManagerController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ShippingController;
 use App\Http\Controllers\AdditionalController;
@@ -17,6 +16,10 @@ use App\Http\Controllers\FileDisplayController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderManagerController;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Http\Request;
+use App\Models\Customer;
 
 // Route::get('/test', function () {
 //         return view('testin');
@@ -107,38 +110,47 @@ Route::get('/danh-muc-bai-viet/{cate_post_slug}', [CategoryPost::class, 'danh_mu
 Route::get('/bai-viet/{post_slug}', [PostController::class, 'bai_viet']);
 
 // Đăng nhập
-Route::get('/login', [CheckoutController::class, 'login']);
-Route::post('/login-customer', [CheckoutController::class, 'login_customer']);
+Route::get('/login', 'App\Http\Controllers\CheckoutController@login');
+Route::post('/login-customer','App\Http\Controllers\CheckoutController@login_customer');
 
 // Đăng ký
-Route::get('/register', [CheckoutController::class, 'register']);
-Route::post('/add-customer', [CheckoutController::class, 'add_customer']);
+Route::get('/register', 'App\Http\Controllers\CheckoutController@register');
+Route::post('/add-customer', 'App\Http\Controllers\CheckoutController@add_customer');
 
 // Group này xác định các route cần có customer_id thì mới truy cập được
 Route::group(['middleware' => 'customer'], function () {
-    // Update-profile
-    Route::post('/update-customer/{customer_id}', [CheckoutController::class, 'update_customer']);
+    // update-profle
+    Route::post('/update-customer/{customer_id}', 'App\Http\Controllers\CheckoutController@update_customer');
     // Các route yêu cầu đăng nhập
-    Route::get('/personal_infor', [CheckoutController::class, 'personal_infor']);
-    // Đăng xuất
-    Route::get('/logout', [CheckoutController::class, 'logout']);
+    Route::get('/personal_infor', 'App\Http\Controllers\CheckoutController@personal_infor');
+
+    // logout
+    Route::get('/logout', 'App\Http\Controllers\CheckoutController@logout');
+
     // Đổi mật khẩu
-    Route::get('/change_pass', [CheckoutController::class, 'Change_pass']);
-    Route::post('/change_pass', [CheckoutController::class, 'check_change_pass']);
-    Route::get('/order_management', [CheckoutController::class, 'Order_management']);
-    Route::post('/upload-avatar/{customer_id}', [CheckoutController::class, 'upload_avatar']);
+    Route::get('/change_pass', 'App\Http\Controllers\CheckoutController@Change_pass');
+    Route::post('/change_pass', 'App\Http\Controllers\CheckoutController@check_change_pass');
+
+    Route::get('/order_management', 'App\Http\Controllers\CheckoutController@Order_management');
+
+    Route::post('/upload-avatar/{customer_id}', 'App\Http\Controllers\CheckoutController@upload_avatar');
 });
 
 // Hàm lấy quận từ thành phố
-Route::post('/get-districts', [CheckoutController::class, 'fetchDistrict'])->name('fetch_d');
+Route::post('/get-districts', 'App\Http\Controllers\CheckoutController@fetchDistrict')->name('fetch_d');
 
+Route::get('/order-not-process-yet', [OrderManagerController::class, 'order_not_process_yet'])->name('order_not_process_yet');
+Route::get('/order-not-delivered-yet', [OrderManagerController::class, 'order_not_delivered_yet'])->name('order_not_delivered_yet');
+Route::get('/order-delivered', [OrderManagerController::class, 'order_delivered'])->name('order_delivered');
 // Quên mật khẩu
-Route::get('/forgot-password', [CheckoutController::class, 'forgot_password']);
-Route::post('/forgot-password', [CheckoutController::class, 'check_forgot_password']);
-Route::get('/verify_otp', [CheckoutController::class, 'verify_otp']);
-Route::post('/verify_otp', [CheckoutController::class, 'check_verify_otp']);
-Route::get('/reset-password', [CheckoutController::class, 'reset_password']);
-Route::post('/reset-password', [CheckoutController::class, 'check_reset_password']);
+Route::get('/forgot-password', 'App\Http\Controllers\CheckoutController@forgot_password');
+Route::post('/forgot-password', 'App\Http\Controllers\CheckoutController@check_forgot_password');
+
+Route::get('/verify_otp', 'App\Http\Controllers\CheckoutController@verify_otp');
+Route::post('/verify_otp', 'App\Http\Controllers\CheckoutController@check_verify_otp');
+
+Route::get('/reset-password', 'App\Http\Controllers\CheckoutController@reset_password');
+Route::post('/reset-password', 'App\Http\Controllers\CheckoutController@check_reset_password'); 
 
 // Thanh toán
 Route::get('/hoa-don', [OrderController::class, 'hoaDon'])->name('hoa_don');
@@ -163,5 +175,11 @@ Route::post('/save-cart', [CartController::class, 'save_cart'])->name('cart.save
 
 // Gửi email
 Route::get('/test-email', [EmailController::class, 'testEmail']);
+
+
+//overnight
+Route::get('/accept-order/{id}', [OrderManagerController::class, 'accept_order']);
+Route::get('/order-delivered/{id}', [OrderManagerController::class, 'admin_order_delivered']);
+Route::post('/add-to-cart', [ProductController::class, 'add_to_cart'])->name('add_to_cart');
 
 ?>

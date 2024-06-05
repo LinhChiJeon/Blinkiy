@@ -31,6 +31,36 @@ class ProductController extends Controller
 
         return view('admin.product.add_product')->with('category_product', $category_product)->with('size', $size);
     }
+    public function add_to_cart(Request $request)
+{
+    $product_id = $request->product_id;
+    $quantity = $request->quantity;
+
+    $customer_id = Session::get('customer_id');
+
+    if($customer_id) {
+        // Thêm vào giỏ hàng của người dùng đăng nhập
+        $data = [
+            'customer_id' => $customer_id,
+            'product_id' => $product_id,
+            'quantity' => $quantity
+        ];
+
+        DB::table('tbl_cart')->insert($data);
+    } else {
+        // Lưu vào session
+        $cart = Session::get('cart');
+        if(!$cart) {
+            $cart = [];
+        }
+
+        $cart[$product_id] = $quantity;
+
+        Session::put('cart', $cart);
+    }
+
+    return Redirect::to('/chi-tiet-san-pham/{product_id}');
+}
     public function all_product()
     {
         $this->AuthLogin();
@@ -245,7 +275,9 @@ class ProductController extends Controller
         ->orderby('tbl_product.product_id','asc')->limit(12)->get();
 
         $gallery_product=DB::table('tbl_gallery')->where('product_id',$product_id)->get();
-        
+        $category_product_header = DB::table('tbl_category_product')
+        ->orderby('category_id', 'asc')
+        ->get();
         return view('pages.sanpham.inside_product')
         ->with('product',$product_by_id)
         ->with('related_product',$related_product)

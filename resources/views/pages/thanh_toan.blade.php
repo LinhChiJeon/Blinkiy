@@ -80,13 +80,13 @@
                 </div>
                 <div class="shipping_fee">
                     <span class="shipping_header">Phí giao hàng</span> 
-                    <span class="shipping">0</span>
+                    <span class="shipping">30.000</span>
                 </div>
                 <hr>
             </div>
             <div class="sum_container">
                 <span>Tổng tiền</span> 
-                <span class="sum" name="sum">{{ number_format($total, 0, ',', '.') }} ₫</span>
+                <span class="sum" name="sum">{{ number_format($total + 30000, 0, ',', '.') }} ₫</span>
             </div>
             <div class="discount_container">
                 <input type="Input" name="discount" placeholder="Mã giảm giá...">

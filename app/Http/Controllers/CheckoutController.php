@@ -17,7 +17,9 @@ use App\Mail\ForgotPassword;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\console;
-use App\Models\Customer; // Import model Customer
+use App\Models\Customer;
+
+
 
 session_start();
 
@@ -114,16 +116,24 @@ class CheckoutController extends Controller
 
     public function personal_infor()
     {
-        $provinces = DB::table('tinh')->get();
-        $districts = DB::table('huyen')->get(); 
+        $customer_id = Session::get('customer_id');
+    $customer = Customer::find($customer_id);
+    dd($customer);
+        $provinces = DB::table('province')->get();
+        $districts = DB::table('district')->get();
         // Lấy ID khách hàng từ Session
         $customer_id = Session::get('customer_id');
         // Truy vấn thông tin khách hàng từ cơ sở dữ liệu
-        $customer = DB::table('tbl_customers')->where('customer_id', $customer_id)->first();
-
+        $customer = Customer::find($customer_id);
+    
         // Trả về view với dữ liệu của khách hàng
-        return view('pages.khachhang.pages_child.personal_infor')->with('customer', $customer)->with('provinces', $provinces)->with('districts', $districts);
+        return view('pages.khachhang.pages_child.personal_infor', [
+            'customer' => $customer,
+            'provinces' => $provinces,
+            'districts' => $districts,
+        ]);
     }
+    
 
 
     public function update_customer(Request $request, $customer_id)
@@ -134,15 +144,15 @@ class CheckoutController extends Controller
         $data['customer_phone'] = $request->user_tel;
         $data['customer_date'] = $request->user_date;
         $city_id = $request->input('user_city');
-        $city_info = DB::table('tinh')->where('MaTinh', $city_id)->first();
+        $city_info = DB::table('province')->where('province_id', $city_id)->first();
         if ($city_info) {
-            $data['customer_city'] = $city_info->TenTinh;
+            $data['customer_city'] = $city_info->province_name;
         }
         // dd($city_info);
         $district = $request->input('user_district');
-        $distric_info = DB::table('huyen')->where('MaHuyen', $district)->first();
-        if($distric_info){
-            $data['customer_district'] = $distric_info->TenHuyen;
+        $distric_info = DB::table('district')->where('district_id', $district)->first();
+        if ($distric_info) {
+            $data['customer_district'] = $distric_info->district_name;
         }
         // $data['customer_district'] = $request->user_district;
         $email = DB::table('tbl_customers')->where('customer_id', $customer_id)->value('customer_email');
@@ -305,10 +315,12 @@ class CheckoutController extends Controller
             $customer_id = Session::get('customer_id');
             $old_image_name = DB::table('tbl_customers')->where('customer_id', $customer_id)->value('customer_image');
             $filePath = 'public/uploads/customers_avatar/' . $old_image_name;
-            if (file_exists($filePath)) {
-                unlink($filePath);
-            } //để khi thay thế thì mình sẽ truy cập vào folder upadates xóa ảnh khi trước luôn
+            if ($old_image_name) {
 
+                if (file_exists($filePath)) {
+                    unlink($filePath);
+                } //để khi thay thế thì mình sẽ truy cập vào folder upadates xóa ảnh khi trước luôn
+            }
             $get_name_image = $get_image->getClientOriginalName(); //khi dùng getClientOriginalName() nó sẽ lấy toàn bộ tên, bao gồm cả đuôi mở rộng(VD: lấy cả a.jpg)
             $name_image = current(explode('.', $get_name_image)); //explode hàm để cắt tên tính từ dấu . để cắt đuôi mở rộng đi
 
@@ -334,13 +346,13 @@ class CheckoutController extends Controller
         // Kiểm tra nếu request là AJAX
         if ($request->ajax()) {
             // Lấy danh sách quận/huyện từ cơ sở dữ liệu dựa trên cityId
-            $districts = DB::table('huyen')->where('MaTinh', $request->cityId)->get();
+            $districts = DB::table('district')->where('province_id', $request->cityId)->get();
             // console.log($district);
             // Tạo response HTML chứa các option cho dropdown quận/huyện
             $data = '<option value="">Chọn quận/huyện</option>';
 
             foreach ($districts as $district) {
-                $data .= '<option value="' . $district->MaHuyen . '">' . $district->TenHuyen . '</option>';
+                $data .= '<option value="' . $district->district_id . '">' . $district->district_name . '</option>';
             }
 
             // Trả về response

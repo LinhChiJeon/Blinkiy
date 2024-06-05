@@ -105,20 +105,20 @@
         </div>
         <div class="form-group">
             <label for="user_city" class="form-label">Tỉnh/thành phố:</label>
-            <select id="user_city" name="user_city" class="form-control" style="width: 104%; font-size:17px ; height:fit-content" required>
+            <select id="user_city" name="user_city" class="form-control" style="width: 104%; font-size:18px ; height:fit-content" required>
                 <option value="">Chọn tỉnh thành</option>
                 @foreach($provinces as $key => $province)
                 <!-- Nếu tên tỉnh trong bảng tinh giống vói tỉnh khách hàng chọn thì sẽ hiển thị tỉnh thành đó ra -->
-                <option value="{{ $province->MaTinh }}" @if($province->TenTinh == $customer->customer_city) selected @endif>{{ $province->TenTinh }}</option>
+                <option value="{{ $province->province_id }}" @if($province->province_name == $customer->customer_city) selected @endif>{{ $province->province_name }}</option>
                 @endforeach
             </select>
         </div>
 
         <div class="form-group">
             <label for="user_district" class="form-label">Quận/Huyện:</label>
-            <select id="user_district" name="user_district" class="form-control" style="width: 104%; font-size:17px ; height:fit-content" required>
+            <select id="user_district" name="user_district" class="form-control" style="width: 104%; font-size:18px ; height:fit-content" required>
                 @foreach($districts as $district)
-                <option value="{{ $district->MaHuyen }}" @if($district->TenHuyen == $customer->customer_district) selected @endif>{{ $district->TenHuyen }}</option>
+                <option value="{{ $district->district_id }}" @if($district->district_name == $customer->customer_district) selected @endif>{{ $district->district_name }}</option>
                 @endforeach
             </select>
         </div>

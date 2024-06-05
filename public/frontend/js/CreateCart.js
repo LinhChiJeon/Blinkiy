@@ -1,5 +1,5 @@
 var cart = JSON.parse(sessionStorage.getItem('cart'));
-if (cart.length>0 || cart) {
+if (cart.length>0 && cart) {
 
     // alert('áds');
     var cartContainer = document.querySelector('#list');

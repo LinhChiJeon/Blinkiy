@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="{{ asset('public/backend/css/order_manager.css') }}">
 <section class="panel">
     <header class="panel-heading">
-        Các đơn hàng chưa được xử lý
+        Các đơn hàng đang được giao
     </header>
     <div class="panel-body">
         <table border='1' cellspacing='0'>
@@ -32,7 +32,7 @@
                     <td>{{ $orders->order_date }}</td>
                     <td>{{ $orders->order_status }}</td>
                     <td>
-                        <a href="{{ url('/accept-order/' . $orders->order_id) }}"></a>
+                        <a href="{{ url('/order-delivered/' . $orders->order_id) }}">Đã giao</a>
                     </td>
                 </tr>
             @endforeach

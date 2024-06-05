@@ -10,16 +10,26 @@ use App\Mail\OrderDetailsMail;
 
 class OrderController extends Controller
 {
+    public function checkout()
+    {
+        view('checkout');
+    }
     public function hoaDon()
     {
         $id = Session::get('id');
-        $order = DB::table('hoadon_vanglai')->where('MaHDVL', $id)->first();
+        $order = DB::table('tbl_customer_order')->where('order_id', $id)->first();
+        $orderDetails = DB::table('tbl_order_details')->where('order_id', $id)->get();
+        $customer = DB::table('tbl_customers')->where('customer_id', $order->customer_id)->first();
 
         if (!$order) {
             return redirect()->route('thanh_toan')->with('error', 'Không tìm thấy hóa đơn.');
         }
 
-        return view('pages.hoa_don', ['order' => $order]);
+        return view('pages.hoa_don', [
+            'order' => $order,
+            'orderDetails' => $orderDetails,
+            'customer' => $customer
+        ]);
     }
 
     public function thanhToan()
@@ -34,8 +44,8 @@ class OrderController extends Controller
         $note = Session::get('note', '');
         $file = Session::get('file_input', '');
     
-        $tinh = DB::table('TINH')->where('MaTinh', $province)->value('TenTinh');
-        $huyen = DB::table('HUYEN')->where('MaHuyen', $district)->value('TenHuyen');
+        $tinh = DB::table('province')->where('province_id', $province)->value('province_name');
+        $huyen = DB::table('district')->where('district_id', $district)->value('district_name');
     
         $cart = Session::get('cart', []); // Lấy giỏ hàng từ session, mặc định là một mảng rỗng nếu không có gì trong session
     
@@ -151,6 +161,7 @@ class OrderController extends Controller
 
     public function submitThanhToan(Request $request)
     {
+        // Lấy thông tin từ session và request
         $hoten = Session::get('name', '');
         $email = Session::get('email', '');
         $sdt = Session::get('phone_num', '');
@@ -162,47 +173,62 @@ class OrderController extends Controller
         $file = Session::get('file_input', '');
         $pttt = $request->input('pttt');
 
-        // Get district and province names
-        $huyen = DB::table('district')->where('district_id', $district)->value('district_name');
+        // Lấy tên tỉnh và huyện từ DB
         $tinh = DB::table('province')->where('province_id', $province)->value('province_name');
+        $huyen = DB::table('district')->where('district_id', $district)->value('district_name');
 
-        $triGia = 0;
-        $date = now();
+        $cart = Session::get('cart', []); // Lấy giỏ hàng từ session
 
-        function generateRandomId($length = 6)
-        {
-            $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-            $charactersLength = strlen($characters);
-            $randomString = 'HDVL';
-            for ($i = 0; $i < $length; $i++) {
-                $randomString .= $characters[rand(0, $charactersLength - 1)];
-            }
-            return $randomString;
+        // Tính tổng tiền
+        $total = 0;
+        foreach ($cart as $item) {
+            $total += $item['product_price'] * $item['product_quantity'];
         }
 
-        $id = generateRandomId();
+        // Tạo dữ liệu địa chỉ đầy đủ
         $fullAddress = ($apartment ? $apartment . ', ' . $address : $address) . ', ' . $huyen . ', ' . $tinh;
 
-        DB::table('tbl_customer_order')->insert([
-            'order_id' => $id,
-            'customer_id' => '',
+        // Tạo order mới trong bảng tbl_customer_order
+        $orderId = DB::table('tbl_customer_order')->insertGetId([
+            'customer_id' => '', // Ensure this is set correctly
             'customer_name' => $hoten,
             'customer_email' => $email,
             'customer_phone' => $sdt,
             'customer_address' => $fullAddress,
-            'order_note' => $note ?: '',
-            'order_files' => $file ?: '',
-            'order_total_price' => $triGia,
-            'order_date' => $date,
+            'order_note' => $note,
+            'order_files' => $file,
+            'order_total_price' => $total,
+            'order_date' => now(),
             'payment_opt' => $pttt,
-            'order_status' => ''
+            'order_status' => 'Pending',
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
+        
 
-        Session::put('id', $id);
+        // Lưu chi tiết đơn hàng vào bảng tbl_order_details
+        foreach ($cart as $item) {
+            DB::table('tbl_order_details')->insert([
+                'order_id' => $orderId,
+                'product_id' => $item['product_id'],
+                'product_quantity' => $item['product_quantity'],
+                'product_price' => $item['product_price'],
+                'total_price' => $item['product_price'] * $item['product_quantity'],
+                'created_at' => now(),
+                'updated_at' => now(),
+                'size_id' => $item['size_id']
+            ]);
+        }
+        
 
-        $order = DB::table('tbl_customer_order')->where('order_id', $id)->first();
+        // Lưu orderId vào session để dùng ở trang hóa đơn
+        Session::put('id', $orderId);
+
+        // Gửi email chi tiết đơn hàng
+        $order = DB::table('tbl_customer_order')->where('order_id', $orderId)->first();
         Mail::to($email)->send(new OrderDetailsMail($order));
 
+        // Xử lý chuyển hướng dựa trên phương thức thanh toán
         switch ($pttt) {
             case 1:
                 return $this->momoqr_payment($request);
@@ -214,4 +240,5 @@ class OrderController extends Controller
                 return redirect()->route('thanh_toan')->with('error', 'Phương thức thanh toán không hợp lệ.');
         }
     }
+
 }

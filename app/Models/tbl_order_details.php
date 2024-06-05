@@ -22,6 +22,7 @@ class tbl_order_details extends Model
         'product_quantity',
         'product_price',
         'total_price',
+        'size_id',
     ];
 
     // Nếu tên các cột created_at và updated_at không phải là mặc định
