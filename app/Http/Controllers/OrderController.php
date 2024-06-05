@@ -20,8 +20,8 @@ class OrderController extends Controller
         $id = Session::get('id');
         $order = DB::table('tbl_customer_order')->where('order_id', $id)->first();
         $orderDetails = DB::table('tbl_order_details')
-            ->join('tbl_products', 'tbl_order_details.product_id', '=', 'tbl_products.product_id')
-            ->select('tbl_order_details.*', 'tbl_products.product_name', 'tbl_products.product_color', 'tbl_products.product_size')
+            ->join('tbl_product', 'tbl_order_details.product_id', '=', 'tbl_product.product_id')
+            ->select('tbl_order_details.*', 'tbl_product.product_name', 'tbl_product.product_color', 'tbl_product.product_size')
             ->where('order_id', $id)
             ->get();
         $customer = DB::table('tbl_customers')->where('customer_id', $order->customer_id)->first();

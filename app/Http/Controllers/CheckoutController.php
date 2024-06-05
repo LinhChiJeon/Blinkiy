@@ -117,8 +117,8 @@ class CheckoutController extends Controller
     public function personal_infor()
     {
         $customer_id = Session::get('customer_id');
-    $customer = Customer::find($customer_id);
-    dd($customer);
+        $customer = Customer::find($customer_id);
+        // dd($customer);
         $provinces = DB::table('province')->get();
         $districts = DB::table('district')->get();
         // Lấy ID khách hàng từ Session

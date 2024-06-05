@@ -110,7 +110,7 @@ Route::get('/danh-muc-bai-viet/{cate_post_slug}', [CategoryPost::class, 'danh_mu
 Route::get('/bai-viet/{post_slug}', [PostController::class, 'bai_viet']);
 
 // Đăng nhập
-Route::get('/login', 'App\Http\Controllers\CheckoutController@login');
+Route::get('/login',[CheckoutController::class, 'login']);
 Route::post('/login-customer','App\Http\Controllers\CheckoutController@login_customer');
 
 // Đăng ký

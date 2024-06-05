@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Customer extends Model
 {
     // Tên bảng trong cơ sở dữ liệu
-    protected $table = 'tbl_customer';
+    protected $table = 'tbl_customers';
 
     // Khóa chính của bảng
     protected $primaryKey = 'customer_id';
@@ -16,7 +16,7 @@ class Customer extends Model
     public $incrementing = true;
 
     // Kiểu dữ liệu của khóa chính
-    protected $keyType = 'bigint';
+    protected $keyType = 'int';
 
     // Nếu bảng có cột timestamps
     public $timestamps = true;
