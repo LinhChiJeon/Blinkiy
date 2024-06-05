@@ -152,11 +152,6 @@ Route::post('/verify_otp', 'App\Http\Controllers\CheckoutController@check_verify
 Route::get('/reset-password', 'App\Http\Controllers\CheckoutController@reset_password');
 Route::post('/reset-password', 'App\Http\Controllers\CheckoutController@check_reset_password'); 
 
-// Thanh toán
-Route::get('/hoa-don', [OrderController::class, 'hoaDon'])->name('hoa_don');
-Route::get('/thanh-toan', [OrderController::class, 'thanhToan'])->name('thanh_toan');
-Route::post('/thanh-toan', [OrderController::class, 'submitThanhToan'])->name('submit_thanh_toan');
-
 // Bổ sung thông tin sau vận chuyển
 Route::get('/bo-sung', [AdditionalController::class, 'index'])->name('bo-sung.index');
 Route::post('/bo-sung', [AdditionalController::class, 'store'])->name('bo-sung.store');
@@ -181,7 +176,12 @@ Route::get('/test-email', [EmailController::class, 'testEmail']);
 Route::get('/accept-order/{id}', [OrderManagerController::class, 'accept_order']);
 Route::get('/order-delivered/{id}', [OrderManagerController::class, 'admin_order_delivered']);
 Route::post('/add-to-cart', [ProductController::class, 'add_to_cart'])->name('add_to_cart');
+// Thanh toán
+Route::get('/hoa-don', [OrderController::class, 'hoaDon'])->name('hoa_don');
+Route::get('/thanh-toan', [OrderController::class, 'thanhToan'])->name('thanh_toan');
+Route::post('/thanh-toan', [OrderController::class, 'submitThanhToan'])->name('submit_thanh_toan');
 Route::get('/momo-result', [OrderController::class, 'momoPaymentResult'])->name('momoPaymentResult');
+
 
 
 ?>

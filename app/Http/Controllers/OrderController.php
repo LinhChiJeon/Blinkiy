@@ -14,12 +14,16 @@ class OrderController extends Controller
     {
         return view('checkout');
     }
-    
+
     public function hoaDon()
     {
         $id = Session::get('id');
         $order = DB::table('tbl_customer_order')->where('order_id', $id)->first();
-        $orderDetails = DB::table('tbl_order_details')->where('order_id', $id)->get();
+        $orderDetails = DB::table('tbl_order_details')
+            ->join('tbl_products', 'tbl_order_details.product_id', '=', 'tbl_products.product_id')
+            ->select('tbl_order_details.*', 'tbl_products.product_name', 'tbl_products.product_color', 'tbl_products.product_size')
+            ->where('order_id', $id)
+            ->get();
         $customer = DB::table('tbl_customers')->where('customer_id', $order->customer_id)->first();
 
         if (!$order) {
@@ -44,18 +48,18 @@ class OrderController extends Controller
         $apartment = Session::get('apartment', '');
         $note = Session::get('note', '');
         $file = Session::get('file_input', '');
-    
+
         $tinh = DB::table('province')->where('province_id', $province)->value('province_name');
         $huyen = DB::table('district')->where('district_id', $district)->value('district_name');
-    
+
         $cart = Session::get('cart', []); // Lấy giỏ hàng từ session, mặc định là một mảng rỗng nếu không có gì trong session
-    
+
         // Tính tổng tiền
         $total = 0;
         foreach ($cart as $item) {
             $total += $item['product_price'] * $item['product_quantity'];
         }
-    
+
         return view('pages.thanh_toan', compact('hoten', 'email', 'sdt', 'province', 'district', 'address', 'apartment', 'note', 'file', 'tinh', 'huyen', 'cart', 'total'));
     }
 
@@ -66,8 +70,8 @@ class OrderController extends Controller
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-                'Content-Type: application/json',
-                'Content-Length: ' . strlen($data))
+            'Content-Type: application/json',
+            'Content-Length: ' . strlen($data))
         );
         curl_setopt($ch, CURLOPT_TIMEOUT, 5);
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
@@ -159,103 +163,114 @@ class OrderController extends Controller
     }
 
     public function submitThanhToan(Request $request)
-    {
-        // Lấy thông tin từ session và request
-        $hoten = Session::get('name', '');
-        $email = Session::get('email', '');
-        $sdt = Session::get('phone_num', '');
-        $province = Session::get('province', '');
-        $district = Session::get('district', '');
-        $address = Session::get('address', '');
-        $apartment = Session::get('apartment', '');
-        $note = Session::get('note', '') ?? '';
-        $file = Session::get('file_input', '');
-        $pttt = $request->input('pttt');
+{
+    // Lấy thông tin từ session và request
+    $customerId = Session::get('customer_id', ''); // Lấy customer_id từ session
+    $hoten = Session::get('name', '');
+    $email = Session::get('email', '');
+    $sdt = Session::get('phone_num', '');
+    $province = Session::get('province', '');
+    $district = Session::get('district', '');
+    $address = Session::get('address', '');
+    $apartment = Session::get('apartment', '');
+    $note = Session::get('note', '') ?? '';
+    $file = Session::get('file_input', '');
+    $pttt = $request->input('pttt');
 
-        // Lấy tên tỉnh và huyện từ DB
-        $tinh = DB::table('province')->where('province_id', $province)->value('province_name');
-        $huyen = DB::table('district')->where('district_id', $district)->value('district_name');
+    // Lấy tên tỉnh và huyện từ DB
+    $tinh = DB::table('province')->where('province_id', $province)->value('province_name');
+    $huyen = DB::table('district')->where('district_id', $district)->value('district_name');
 
-        $cart = Session::get('cart', []); // Lấy giỏ hàng từ session
+    $cart = Session::get('cart', []); // Lấy giỏ hàng từ session
 
-        // Tính tổng tiền
-        $total = 0;
-        foreach ($cart as $item) {
-            $total += $item['product_price'] * $item['product_quantity'];
-        }
-
-        // Tạo dữ liệu địa chỉ đầy đủ
-        $fullAddress = ($apartment ? $apartment . ', ' . $address : $address) . ', ' . $huyen . ', ' . $tinh;
-
-        if ($pttt == 3) {
-            // Nếu thanh toán khi nhận hàng, lưu đơn hàng vào DB và session
-            $orderId = DB::table('tbl_customer_order')->insertGetId([
-                'customer_id' => '', // Đảm bảo rằng trường này được thiết lập đúng
-                'customer_name' => $hoten,
-                'customer_email' => $email,
-                'customer_phone' => $sdt,
-                'customer_address' => $fullAddress,
-                'order_note' => $note,
-                'order_files' => $file,
-                'order_total_price' => $total,
-                'order_date' => now(),
-                'payment_opt' => $pttt,
-                'order_status' => 'Pending',
-                'created_at' => now(),
-                'updated_at' => now()
-            ]);
-
-            // Lưu chi tiết đơn hàng vào bảng tbl_order_details
-            foreach ($cart as $item) {
-                DB::table('tbl_order_details')->insert([
-                    'order_id' => $orderId,
-                    'product_id' => $item['product_id'],
-                    'product_quantity' => $item['product_quantity'],
-                    'product_price' => $item['product_price'],
-                    'total_price' => $item['product_price'] * $item['product_quantity'],
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                    'size_id' => $item['product_size']
-                ]);
-            }
-
-            // Lưu orderId vào session để dùng ở trang hóa đơn
-            Session::put('id', $orderId);
-
-            // Gửi email chi tiết đơn hàng
-            $order = DB::table('tbl_customer_order')->where('order_id', $orderId)->first();
-            Mail::to($email)->send(new OrderDetailsMail($order));
-
-            return redirect()->route('hoa_don');
-        } else {
-            // Nếu thanh toán qua MoMo, chỉ lưu vào session và điều hướng đến MoMo
-            Session::put('order_data', [
-                'customer_name' => $hoten,
-                'customer_email' => $email,
-                'customer_phone' => $sdt,
-                'customer_address' => $fullAddress,
-                'order_note' => $note,
-                'order_files' => $file,
-                'order_total_price' => $total,
-                'order_date' => now(),
-                'payment_opt' => $pttt,
-                'order_status' => 'Pending',
-                'cart' => $cart,
-                'tinh' => $tinh,
-                'huyen' => $huyen
-            ]);
-
-            $amount = $total + 30000; // Thêm phí giao hàng
-
-            if ($pttt == 1) {
-                return $this->momoqr_payment($request->merge(['amount' => $amount]));
-            } else if ($pttt == 2) {
-                return $this->momo_payment($request->merge(['amount' => $amount]));
-            }
-        }
-
-        return redirect()->route('thanh_toan')->with('error', 'Phương thức thanh toán không hợp lệ.');
+    // Tính tổng tiền
+    $total = 0;
+    foreach ($cart as $item) {
+        $total += $item['product_price'] * $item['product_quantity'];
     }
+
+    // Tạo dữ liệu địa chỉ đầy đủ
+    $fullAddress = ($apartment ? $apartment . ', ' . $address : $address) . ', ' . $huyen . ', ' . $tinh;
+
+    if ($pttt == 3) {
+        // Nếu thanh toán khi nhận hàng, lưu đơn hàng vào DB và session
+        $orderId = DB::table('tbl_customer_order')->insertGetId([
+            'customer_id' => $customerId, // Đảm bảo rằng trường này được thiết lập đúng
+            'customer_name' => $hoten,
+            'customer_email' => $email,
+            'customer_phone' => $sdt,
+            'customer_address' => $fullAddress,
+            'order_note' => $note,
+            'order_files' => $file,
+            'order_total_price' => $total,
+            'order_date' => now(),
+            'payment_opt' => $pttt,
+            'order_status' => 'Pending',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        // Lưu chi tiết đơn hàng vào bảng tbl_order_details
+        foreach ($cart as $item) {
+            DB::table('tbl_order_details')->insert([
+                'order_id' => $orderId,
+                'product_id' => $item['product_id'],
+                'product_quantity' => $item['product_quantity'],
+                'product_price' => $item['product_price'],
+                'total_price' => $item['product_price'] * $item['product_quantity'],
+                'created_at' => now(),
+                'updated_at' => now(),
+                'size_id' => $item['product_size']
+            ]);
+        }
+
+        // Lưu orderId vào session để dùng ở trang hóa đơn
+        Session::put('id', $orderId);
+
+        // Cập nhật số lượng hàng còn trong kho
+        foreach ($cart as $item) {
+            DB::table('tbl_product')
+                ->where('product_id', $item['product_id'])
+                ->decrement('product_number', $item['product_quantity']);
+        }
+
+        // Gửi email chi tiết đơn hàng
+        $order = DB::table('tbl_customer_order')->where('order_id', $orderId)->first();
+        Mail::to($email)->send(new OrderDetailsMail($order));
+
+        // Xóa session
+        Session::forget(['cart', 'customer_id', 'name', 'email', 'phone_num', 'province', 'district', 'address', 'apartment', 'note', 'file_input']);
+
+        return redirect()->route('hoa_don');
+    } else {
+        // Nếu thanh toán qua MoMo, chỉ lưu vào session và điều hướng đến MoMo
+        Session::put('order_data', [
+            'customer_id' => $customerId, // Đảm bảo rằng trường này được thiết lập đúng
+            'customer_name' => $hoten,
+            'customer_email' => $email,
+            'customer_phone' => $sdt,
+            'customer_address' => $fullAddress,
+            'order_note' => $note,
+            'order_files' => $file,
+            'order_total_price' => $total,
+            'order_date' => now(),
+            'payment_opt' => $pttt,
+            'order_status' => 'Pending',
+            'cart' => $cart // Lưu giỏ hàng vào session để sử dụng sau
+        ]);
+
+        $amount = $total + 30000; // Thêm phí giao hàng
+
+        if ($pttt == 1) {
+            return $this->momoqr_payment($request->merge(['amount' => $amount]));
+        } else if ($pttt == 2) {
+            return $this->momo_payment($request->merge(['amount' => $amount]));
+        }
+    }
+
+    return redirect()->route('thanh_toan')->with('error', 'Phương thức thanh toán không hợp lệ.');
+}
+
 
     public function momoPaymentResult(Request $request)
     {
@@ -283,9 +298,19 @@ class OrderController extends Controller
             // Lưu orderId vào session để dùng ở trang hóa đơn
             Session::put('id', $orderId);
 
+            // Cập nhật số lượng hàng còn trong kho
+            foreach ($orderData['cart'] as $item) {
+                DB::table('tbl_product')
+                    ->where('product_id', $item['product_id'])
+                    ->decrement('product_number', $item['product_quantity']);
+            }
+
             // Gửi email chi tiết đơn hàng
             $order = DB::table('tbl_customer_order')->where('order_id', $orderId)->first();
             Mail::to($orderData['customer_email'])->send(new OrderDetailsMail($order));
+
+            // Xóa session
+            Session::forget(['order_data', 'cart', 'customer_id', 'name', 'email', 'phone_num', 'province', 'district', 'address', 'apartment', 'note', 'file_input']);
 
             return redirect()->route('hoa_don');
         } else {
