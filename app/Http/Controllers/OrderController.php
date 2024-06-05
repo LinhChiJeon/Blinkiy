@@ -216,7 +216,7 @@ class OrderController extends Controller
                 'total_price' => $item['product_price'] * $item['product_quantity'],
                 'created_at' => now(),
                 'updated_at' => now(),
-                'size_id' => $item['size_id']
+                'size_id' => $item['product_size']
             ]);
         }
         

@@ -53,4 +53,9 @@ class ShippingController extends Controller
         return redirect()->route('bo-sung.index');  // Chuyển hướng đến trang bổ sung
     }
 
+    public function login(Request $request)
+    {
+        
+    }
+
 }
