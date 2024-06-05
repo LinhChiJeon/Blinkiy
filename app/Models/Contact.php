@@ -11,17 +11,18 @@ class Contact extends Model
 
     protected $table = 'contact';
 
-    protected $primaryKey = 'stt';
+    protected $primaryKey = 'contact_id';
 
     protected $fillable = [
-        'stt',
-        'TenKhachHang',
-        'SDT',
+        'customer_name',
+        'customer_phone',
         'Email',
-        'TieuDe',
-        'CauHoi',
-        'PhanHoi',
-        'PhanHoi_TieuDe',
-        'PhanHoi_NoiDung',
+        'contact_title',
+        'contact_question',
+        'reply_status',
+        'reply_title',
+        'reply_content',
     ];
+
+    public $timestamps = true;
 }

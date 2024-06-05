@@ -60,16 +60,16 @@ class ContactController extends Controller
         // Đặt giá trị mặc định cho trường "SDT" nếu không được điền vào
         $sdt = $request->filled('sdt') ? $validatedData['sdt'] : '';
 
-        // Lưu dữ liệu vào cơ sở dữ liệu
-        $contact = new Contact();
-        $contact->TenKhachHang = $validatedData['name'];
-        $contact->SDT = $sdt;
-        $contact->Email = $validatedData['email'];
-        $contact->TieuDe = $validatedData['title'];
-        $contact->CauHoi = $validatedData['question'];
-        $contact->PhanHoi = false;
-        $contact->PhanHoi_TieuDe = '';
-        $contact->PhanHoi_NoiDung = '';
+                    // Lưu dữ liệu vào cơ sở dữ liệu
+            $contact = new Contact();
+            $contact->customer_name = $validatedData['name'];
+            $contact->customer_phone = $sdt;
+            $contact->Email = $validatedData['email'];
+            $contact->contact_title = $validatedData['title'];
+            $contact->contact_question = $validatedData['question'];
+            $contact->reply_status = false;
+            $contact->reply_title = '';
+            $contact->reply_content = '';
 
         if ($contact->save()) {
             return redirect()->route('lien_he')->with('success', 'Thêm thành công.');
