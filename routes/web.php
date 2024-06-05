@@ -181,6 +181,7 @@ Route::get('/hoa-don', [OrderController::class, 'hoaDon'])->name('hoa_don');
 Route::get('/thanh-toan', [OrderController::class, 'thanhToan'])->name('thanh_toan');
 Route::post('/thanh-toan', [OrderController::class, 'submitThanhToan'])->name('submit_thanh_toan');
 Route::get('/momo-result', [OrderController::class, 'momoPaymentResult'])->name('momoPaymentResult');
+Route::get('/gioi-thieu', [HomeController::class, 'gioithieu'])->name('gioithieu');
 
 
 

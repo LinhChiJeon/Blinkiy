@@ -12,6 +12,10 @@ session_start();
 use App\Models\CatePost;
 class HomeController extends Controller
 {
+    public function gioithieu()
+    {
+        return view('pages.gioi_thieu');
+    }
     public function index(Request $request)
     {
         $category_product=DB::table('tbl_category_product')->where('category_status','1')->orderby('category_id','asc')->get();
