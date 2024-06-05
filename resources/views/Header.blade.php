@@ -61,7 +61,7 @@
                 </ul>
             </li>
             <li class="mainmenu-li">
-                <a class="menu-bar-title" href="">GIỚI THIỆU</a>
+                <a class="menu-bar-title" href="{{ URL::to('/gioi-thieu') }}">GIỚI THIỆU</a>
             </li>
             <li class="mainmenu-li">
                 <a class="menu-bar-title" href="">BLOG</a>

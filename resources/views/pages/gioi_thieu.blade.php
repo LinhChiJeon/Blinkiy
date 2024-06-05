@@ -34,16 +34,16 @@
                 <p>Tại <span>BLINKIY</span>, chúng tôi không chỉ cung cấp những sản phẩm chất lượng cao, mà còn truyền tải những giá trị tinh thần và sự cân bằng trong cuộc sống thông qua từng món trang sức.</p>
             </div>
             <div class = "img1">
-                <img src = "img/Rectangle 157.png" name = "img1" id = "img1">
+                <img src = "{{('public/frontend/images/Rectangle 157.png')}}" name = "img1" id = "img1">
             </div>
         </div>
         <div class = "content1">
             <p><span>BLINKIY</span>, chuyên cung cấp trang sức phong thủy cao cấp như:</p>
-            <p><img src = "img/Vector.png">Vòng tay phong thủy</p>
-            <p><img src = "img/Vector (1).png">Dây chuyền nạm đá phong thủy</p>
-            <p><img src = "img/Vector (2).png">Nhẫn phong thủy</p>
-            <p><img src = "img/Vector (3).png">Charm phong thủy</p>
-            <p><img src = "img/Vector (4).png">Với cam kết được làm từ 100% đá phong thủy tự nhiên, gỗ quý hiếm và bạc cao cấp.</p>
+            <p><img src = "{{('public/frontend/images/Vector.png')}}">Vòng tay phong thủy</p>
+            <p><img src = "{{('public/frontend/images/Vector (1).png')}}">Dây chuyền nạm đá phong thủy</p>
+            <p><img src = "{{('public/frontend/images/Vector (2).png')}}">Nhẫn phong thủy</p>
+            <p><img src = "{{('public/frontend/images/Vector (3).png')}}">Charm phong thủy</p>
+            <p><img src = "{{('public/frontend/images/Vector (4).png')}}">Với cam kết được làm từ 100% đá phong thủy tự nhiên, gỗ quý hiếm và bạc cao cấp.</p>
         </div>
         <div class = "bg1"></div>
         <div class = "content1">
