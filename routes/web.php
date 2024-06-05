@@ -110,19 +110,19 @@ Route::get('/danh-muc-bai-viet/{cate_post_slug}', [CategoryPost::class, 'danh_mu
 Route::get('/bai-viet/{post_slug}', [PostController::class, 'bai_viet']);
 
 // Đăng nhập
-Route::get('/ho-so', 'App\Http\Controllers\CheckoutController@login');
+Route::get('/login', 'App\Http\Controllers\CheckoutController@login');
 Route::post('/login-customer','App\Http\Controllers\CheckoutController@login_customer');
 
 // Đăng ký
 Route::get('/register', 'App\Http\Controllers\CheckoutController@register');
 Route::post('/add-customer', 'App\Http\Controllers\CheckoutController@add_customer');
-
+Route::get('/personal_infor', 'App\Http\Controllers\CheckoutController@personal_infor');
 // Group này xác định các route cần có customer_id thì mới truy cập được
 Route::group(['middleware' => 'customer'], function () {
     // update-profle
     Route::post('/update-customer/{customer_id}', 'App\Http\Controllers\CheckoutController@update_customer');
     // Các route yêu cầu đăng nhập
-    Route::get('/personal_infor', 'App\Http\Controllers\CheckoutController@personal_infor');
+    // Route::get('/personal_infor', 'App\Http\Controllers\CheckoutController@personal_infor');
 
     // logout
     Route::get('/logout', 'App\Http\Controllers\CheckoutController@logout');
@@ -181,5 +181,7 @@ Route::get('/test-email', [EmailController::class, 'testEmail']);
 Route::get('/accept-order/{id}', [OrderManagerController::class, 'accept_order']);
 Route::get('/order-delivered/{id}', [OrderManagerController::class, 'admin_order_delivered']);
 Route::post('/add-to-cart', [ProductController::class, 'add_to_cart'])->name('add_to_cart');
+Route::get('/momo-result', [OrderController::class, 'momoPaymentResult'])->name('momoPaymentResult');
+
 
 ?>

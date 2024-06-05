@@ -4,14 +4,11 @@
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link href="{{ asset('public/frontend/css/StyleShoppingCart.css') }}" rel="stylesheet">
     <title>Giỏ hàng | Blinkiy</title>
-    
 </head>
 
 <body>
@@ -92,10 +89,17 @@
                     <hr>
                     <div class="order_items">
                     </div>
-                    <hr>
+                    {{-- <hr> --}}
                     <div class="total_container">
                         <span class="total_title">Tổng tiền</span>
                         <span class="all_total">0đ</span>
+                    </div>
+                    <div class="discount_container">
+                        <input type="Input" name="discount" placeholder="Mã giảm giá...">
+                        <button class="apply_discount">
+                            <span class="discount_icon"><span class="streamline--discount-percent-coupon"></span></span>
+                            <b>Áp dụng</b>
+                        </button>
                     </div>
 
                     <div class="pay">
@@ -109,12 +113,7 @@
         </div>
     </div>
 
-    {{-- $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    }); --}}
-    
+
     <script src="{{ asset('public/frontend/js/ScriptShoppingCart.js') }}"></script>
     <script>
         function DeleteCart(cart) {
@@ -282,7 +281,7 @@
                 });
             });
         </script>
-                
 </body>
+@include('Footer')
 
 </html>

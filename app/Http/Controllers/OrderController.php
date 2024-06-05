@@ -12,8 +12,9 @@ class OrderController extends Controller
 {
     public function checkout()
     {
-        view('checkout');
+        return view('checkout');
     }
+    
     public function hoaDon()
     {
         $id = Session::get('id');
@@ -57,8 +58,6 @@ class OrderController extends Controller
     
         return view('pages.thanh_toan', compact('hoten', 'email', 'sdt', 'province', 'district', 'address', 'apartment', 'note', 'file', 'tinh', 'huyen', 'cart', 'total'));
     }
-    
-
 
     function execPostRequest($url, $data)
     {
@@ -87,10 +86,10 @@ class OrderController extends Controller
         $accessKey = 'klm05TvNBzhg7h7j';
         $secretKey = 'at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa';
         $orderInfo = "Thanh toán qua ATM MoMo";
-        $amount = "10000";
+        $amount = $request->input('amount');
         $orderId = time() ."";
-        $redirectUrl = route('hoa_don');
-        $ipnUrl = route('hoa_don');
+        $redirectUrl = route('momoPaymentResult');
+        $ipnUrl = route('momoPaymentResult');
         $extraData = "";
 
         $requestId = time() . "";
@@ -128,10 +127,10 @@ class OrderController extends Controller
         $secretKey = 'at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa';
 
         $orderInfo = "Thanh toán qua mã QR MoMo";
-        $amount = "10000";
+        $amount = $request->input('amount');
         $orderId = time() ."";
-        $redirectUrl = route('hoa_don');
-        $ipnUrl = route('hoa_don');
+        $redirectUrl = route('momoPaymentResult');
+        $ipnUrl = route('momoPaymentResult');
         $extraData = "";
         $requestId = time() . "";
         $requestType = "captureWallet";
@@ -188,57 +187,109 @@ class OrderController extends Controller
         // Tạo dữ liệu địa chỉ đầy đủ
         $fullAddress = ($apartment ? $apartment . ', ' . $address : $address) . ', ' . $huyen . ', ' . $tinh;
 
-        // Tạo order mới trong bảng tbl_customer_order
-        $orderId = DB::table('tbl_customer_order')->insertGetId([
-            'customer_id' => '', // Ensure this is set correctly
-            'customer_name' => $hoten,
-            'customer_email' => $email,
-            'customer_phone' => $sdt,
-            'customer_address' => $fullAddress,
-            'order_note' => $note,
-            'order_files' => $file,
-            'order_total_price' => $total,
-            'order_date' => now(),
-            'payment_opt' => $pttt,
-            'order_status' => 'Pending',
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-        
-
-        // Lưu chi tiết đơn hàng vào bảng tbl_order_details
-        foreach ($cart as $item) {
-            DB::table('tbl_order_details')->insert([
-                'order_id' => $orderId,
-                'product_id' => $item['product_id'],
-                'product_quantity' => $item['product_quantity'],
-                'product_price' => $item['product_price'],
-                'total_price' => $item['product_price'] * $item['product_quantity'],
+        if ($pttt == 3) {
+            // Nếu thanh toán khi nhận hàng, lưu đơn hàng vào DB và session
+            $orderId = DB::table('tbl_customer_order')->insertGetId([
+                'customer_id' => '', // Đảm bảo rằng trường này được thiết lập đúng
+                'customer_name' => $hoten,
+                'customer_email' => $email,
+                'customer_phone' => $sdt,
+                'customer_address' => $fullAddress,
+                'order_note' => $note,
+                'order_files' => $file,
+                'order_total_price' => $total,
+                'order_date' => now(),
+                'payment_opt' => $pttt,
+                'order_status' => 'Pending',
                 'created_at' => now(),
-                'updated_at' => now(),
-                'size_id' => $item['product_size']
+                'updated_at' => now()
             ]);
+
+            // Lưu chi tiết đơn hàng vào bảng tbl_order_details
+            foreach ($cart as $item) {
+                DB::table('tbl_order_details')->insert([
+                    'order_id' => $orderId,
+                    'product_id' => $item['product_id'],
+                    'product_quantity' => $item['product_quantity'],
+                    'product_price' => $item['product_price'],
+                    'total_price' => $item['product_price'] * $item['product_quantity'],
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                    'size_id' => $item['product_size']
+                ]);
+            }
+
+            // Lưu orderId vào session để dùng ở trang hóa đơn
+            Session::put('id', $orderId);
+
+            // Gửi email chi tiết đơn hàng
+            $order = DB::table('tbl_customer_order')->where('order_id', $orderId)->first();
+            Mail::to($email)->send(new OrderDetailsMail($order));
+
+            return redirect()->route('hoa_don');
+        } else {
+            // Nếu thanh toán qua MoMo, chỉ lưu vào session và điều hướng đến MoMo
+            Session::put('order_data', [
+                'customer_name' => $hoten,
+                'customer_email' => $email,
+                'customer_phone' => $sdt,
+                'customer_address' => $fullAddress,
+                'order_note' => $note,
+                'order_files' => $file,
+                'order_total_price' => $total,
+                'order_date' => now(),
+                'payment_opt' => $pttt,
+                'order_status' => 'Pending',
+                'cart' => $cart,
+                'tinh' => $tinh,
+                'huyen' => $huyen
+            ]);
+
+            $amount = $total + 30000; // Thêm phí giao hàng
+
+            if ($pttt == 1) {
+                return $this->momoqr_payment($request->merge(['amount' => $amount]));
+            } else if ($pttt == 2) {
+                return $this->momo_payment($request->merge(['amount' => $amount]));
+            }
         }
-        
 
-        // Lưu orderId vào session để dùng ở trang hóa đơn
-        Session::put('id', $orderId);
-
-        // Gửi email chi tiết đơn hàng
-        $order = DB::table('tbl_customer_order')->where('order_id', $orderId)->first();
-        Mail::to($email)->send(new OrderDetailsMail($order));
-
-        // Xử lý chuyển hướng dựa trên phương thức thanh toán
-        switch ($pttt) {
-            case 1:
-                return $this->momoqr_payment($request);
-            case 2:
-                return $this->momo_payment($request);
-            case 3:
-                return redirect()->route('hoa_don');
-            default:
-                return redirect()->route('thanh_toan')->with('error', 'Phương thức thanh toán không hợp lệ.');
-        }
+        return redirect()->route('thanh_toan')->with('error', 'Phương thức thanh toán không hợp lệ.');
     }
 
+    public function momoPaymentResult(Request $request)
+    {
+        $resultCode = $request->get('resultCode');
+
+        if ($resultCode == 0) {
+            // Lấy dữ liệu order từ session và lưu vào DB
+            $orderData = Session::get('order_data');
+            $orderId = DB::table('tbl_customer_order')->insertGetId($orderData);
+
+            // Lưu chi tiết đơn hàng vào bảng tbl_order_details
+            foreach ($orderData['cart'] as $item) {
+                DB::table('tbl_order_details')->insert([
+                    'order_id' => $orderId,
+                    'product_id' => $item['product_id'],
+                    'product_quantity' => $item['product_quantity'],
+                    'product_price' => $item['product_price'],
+                    'total_price' => $item['product_price'] * $item['product_quantity'],
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                    'size_id' => $item['product_size']
+                ]);
+            }
+
+            // Lưu orderId vào session để dùng ở trang hóa đơn
+            Session::put('id', $orderId);
+
+            // Gửi email chi tiết đơn hàng
+            $order = DB::table('tbl_customer_order')->where('order_id', $orderId)->first();
+            Mail::to($orderData['customer_email'])->send(new OrderDetailsMail($order));
+
+            return redirect()->route('hoa_don');
+        } else {
+            return redirect()->route('thanh_toan')->with('error', 'Thanh toán thất bại. Bạn hãy thử chọn phương thức thanh toán khác.');
+        }
+    }
 }

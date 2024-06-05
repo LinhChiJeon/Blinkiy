@@ -4,19 +4,14 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- Fonts -->
     <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <link
         href="https://fonts.googleapis.com/css2?family=Rowdies:wght@400;700&family=Francois+One&family=Paytone+One&family=Sigmar&family=Tilt+Neon&family=Saira+Stencil+One&display=swap"
         rel="stylesheet">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
     <link rel="stylesheet" href="{{ asset('public/frontend/css/style_thanh_toan.css') }}">
     <link href="{{ asset('public/frontend/css/StyleHeaderOnly.css') }}" rel="stylesheet">
-
     <title>Thanh toán | Blinkiy</title>
 </head>
 
@@ -99,16 +94,12 @@
                     <div class="items_list">
                         @foreach ($cart as $item)
                             <div class="item">
-                                {{-- <img src="{{ $item['image'] }}" alt="{{ $item['name'] }}"> --}}
                                 <p class="item_name">{{ $item['product_name'] }}</p>
                                 <p class="item_color">Màu: {{ $item['product_color'] }}</p>
                                 <p class="item_size">Kích cỡ: {{ $item['product_size'] }}</p>
-                                <p class="product_quantity">{{ $item['product_quantity'] }}</p>
-
-                                <p class="item_total">
-                                    {{ number_format($item['product_price'] * $item['product_quantity'], 0, ',', '.') }}
-                                    ₫</p>
-                                <p></p>
+                                <p class="product_quantity">SL: {{ $item['product_quantity'] }}</p>
+                                <p class="item_price">Đơn giá: {{ number_format($item['product_price'], 0, ',', '.') }} ₫</p>
+                                <p class="item_total">Thành tiền: {{ number_format($item['product_price'] * $item['product_quantity'], 0, ',', '.') }} ₫</p>
                             </div>
                         @endforeach
                     </div>
