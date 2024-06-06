@@ -1,11 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $subject }}</title>
+    <title>Customer Contact</title>
 </head>
 <body>
-    {!! $body !!}
+    <p>{!! nl2br(e($body)) !!}</p>
 </body>
 </html>

@@ -9,11 +9,11 @@
         <table border='1' cellspacing='0'>
             <tr>
                 <th>Tên khách hàng</th>
-                <td>{{ $contact->TenKhachHang }}</td>
+                <td>{{ $contact->customer_name }}</td>
             </tr>
             <tr>
                 <th>SĐT</th>
-                <td>{{ $contact->SDT }}</td>
+                <td>{{ $contact->customer_phone }}</td>
             </tr>
             <tr>
                 <th>Email</th>
@@ -21,19 +21,19 @@
             </tr>
             <tr>
                 <th>Tiêu đề</th>
-                <td>{{ $contact->TieuDe }}</td>
+                <td>{{ $contact->contact_title }}</td>
             </tr>
             <tr>
                 <th>Câu hỏi</th>
-                <td>{{ $contact->CauHoi }}</td>
+                <td>{{ $contact->contact_question }}</td>
             </tr>
             <tr>
                 <th>Phản hồi - Tiêu đề</th>
-                <td>{{ $contact->PhanHoi_TieuDe }}</td>
+                <td>{{ $contact->reply_title }}</td>
             </tr>
             <tr>
                 <th>Phản hồi - Nội dung</th>
-                <td>{{ $contact->PhanHoi_NoiDung }}</td>
+                <td>{{ $contact->reply_content }}</td>
             </tr>
         </table>
     </div>

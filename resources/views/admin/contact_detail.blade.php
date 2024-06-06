@@ -9,11 +9,11 @@
         <table border='1' cellspacing='0'>
             <tr>
                 <th>Tên khách hàng</th>
-                <td>{{ $contact->TenKhachHang }}</td>
+                <td>{{ $contact->customer_name }}</td>
             </tr>
             <tr>
                 <th>SĐT</th>
-                <td>{{ $contact->SDT }}</td>
+                <td>{{ $contact->customer_phone }}</td>
             </tr>
             <tr>
                 <th>Email</th>
@@ -21,18 +21,37 @@
             </tr>
             <tr>
                 <th>Tiêu đề</th>
-                <td>{{ $contact->TieuDe }}</td>
+                <td>{{ $contact->contact_title }}</td>
             </tr>
             <tr>
                 <th>Câu hỏi</th>
-                <td>{{ $contact->CauHoi }}</td>
+                <td>{{ $contact->contact_question }}</td>
             </tr>
         </table>
     </div>
 
     <div class="panel-body">
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
         <form action="{{ route('send.email.to.customer') }}" method="POST">
             @csrf
+            @if(session()->has('success-update-avatar'))
+            <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+            <script>
+                swal({
+                    title: "Gửi thành công!",
+                    icon: "mail_success",
+                    // button: "Blinkiyyy!",
+                });
+                // Tự động tắt sau 3 giây
+                setTimeout(function() {
+                    swal.close();
+                }, 2000);
+            </script>
+            @endif
             <input type="hidden" name="stt" value="{{ $contact->stt }}">
             <input type="hidden" name="customer_email" value="{{ $contact->Email }}">
             <div class="form-group">

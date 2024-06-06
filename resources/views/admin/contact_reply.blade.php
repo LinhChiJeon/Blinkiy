@@ -19,13 +19,13 @@
             @foreach ($contacts as $index => $contact)
                 <tr>
                     <td>{{ $index + 1 }}</td>
-                    <td>{{ $contact->TenKhachHang }}</td>
-                    <td>{{ $contact->SDT }}</td>
+                    <td>{{ $contact->customer_name }}</td>
+                    <td>{{ $contact->customer_phone }}</td>
                     <td>{{ $contact->Email }}</td>
-                    <td>{{ $contact->TieuDe }}</td>
-                    <td>{{ $contact->CauHoi }}</td>
+                    <td>{{ $contact->contact_title }}</td>
+                    <td>{{ $contact->contact_question }}</td>
                     <td>
-                        <a href="{{ url('/phan-hoi/' . $contact->stt) }}">Phản hồi</a>
+                        <a href="{{ url('/phan-hoi/' . $contact->contact_id) }}">Phản hồi</a>
                     </td>
                 </tr>
             @endforeach

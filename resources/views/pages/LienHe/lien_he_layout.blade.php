@@ -17,6 +17,20 @@
     <section>
         <form method="post" action="{{ route('contact.store') }}">
             @csrf
+            @if(session()->has('Add_success'))
+            <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+            <script>
+                swal({
+                    title: "Đã gửi thành công!",
+                    icon: "success",
+                    // button: "Blinkiyyy!",
+                });
+                // Tự động tắt sau 3 giây
+                setTimeout(function() {
+                    swal.close();
+                }, 2000);
+            </script>
+            @endif
             <div class="title_2LH">
                 <p class="title_2LH_content">Liên hệ</p>
             </div>

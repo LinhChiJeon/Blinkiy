@@ -33,7 +33,8 @@ Route::get('/trang-chu', [HomeController::class, 'index']);
 
 // Send email route
 Route::get('test-email', [SendEmailController::class, 'testEmail']);
-Route::post('/send-email-to-customer', [SendEmailController::class, 'sendEmailToCustomer'])->name('send.email.to.customer');
+Route::post('/send-email-to-customer', [ContactController::class, 'sendEmailToCustomer'])->name('send.email.to.customer');
+
 
 // Contact reply route
 Route::get('/contact_reply', [ContactController::class, 'contact_reply'])->name('contact_reply');
