@@ -20,6 +20,8 @@ use App\Http\Controllers\OrderManagerController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use App\Models\Customer;
+use App\Http\Middleware\CustomerMiddleware;
+
 
 // Route::get('/test', function () {
 //         return view('testin');
@@ -110,13 +112,14 @@ Route::get('/danh-muc-bai-viet/{cate_post_slug}', [CategoryPost::class, 'danh_mu
 Route::get('/bai-viet/{post_slug}', [PostController::class, 'bai_viet']);
 
 // Đăng nhập
-Route::get('/login',[CheckoutController::class, 'login']);
-Route::post('/login-customer','App\Http\Controllers\CheckoutController@login_customer');
+Route::get('/login',[CheckoutController::class, 'login'])->middleware();
+Route::post('/login-customer','App\Http\Controllers\CheckoutController@login_customer')->middleware(CustomerMiddleware::class);
 
 // Đăng ký
 Route::get('/register', 'App\Http\Controllers\CheckoutController@register');
 Route::post('/add-customer', 'App\Http\Controllers\CheckoutController@add_customer');
-Route::get('/personal_infor', 'App\Http\Controllers\CheckoutController@personal_infor');
+
+Route::get('/personal_infor', [CheckoutController::class, 'personal_infor'])->middleware('customer');
 // Group này xác định các route cần có customer_id thì mới truy cập được
 Route::group(['middleware' => 'customer'], function () {
     // update-profle
@@ -142,6 +145,8 @@ Route::post('/get-districts', 'App\Http\Controllers\CheckoutController@fetchDist
 Route::get('/order-not-process-yet', [OrderManagerController::class, 'order_not_process_yet'])->name('order_not_process_yet');
 Route::get('/order-not-delivered-yet', [OrderManagerController::class, 'order_not_delivered_yet'])->name('order_not_delivered_yet');
 Route::get('/order-delivered', [OrderManagerController::class, 'order_delivered'])->name('order_delivered');
+Route::get('/order-detail/{id}', [OrderManagerController::class, 'order_detail'])->name('order_detail');
+
 // Quên mật khẩu
 Route::get('/forgot-password', 'App\Http\Controllers\CheckoutController@forgot_password');
 Route::post('/forgot-password', 'App\Http\Controllers\CheckoutController@check_forgot_password');

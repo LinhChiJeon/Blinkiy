@@ -17,7 +17,7 @@ class CustomerMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if(!session::has("customer_id")){
+        if (!Session::has('customer_id')) {
             return redirect('/login')->with('error_login', 'Bạn cần đăng nhập để truy cập trang này');
         }
         return $next($request);

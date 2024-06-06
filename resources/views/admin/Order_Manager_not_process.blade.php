@@ -19,7 +19,6 @@
                 <th class='order_Trangthai'>Trạng thái</th>
                 <th class='order_Hoatdong'>Hoạt động</th>
             </tr>
-            <!-- order_id	customer_id	customer_name	customer_email	customer_phone	customer_address	order_total_price	order_date	order_status -->
             @foreach ($orders as $index => $orders)
                 <tr>
                     <td>{{ $index + 1 }}</td>
@@ -32,7 +31,7 @@
                     <td>{{ $orders->order_date }}</td>
                     <td>{{ $orders->order_status }}</td>
                     <td>
-                        <a href="{{ url('/accept-order/' . $orders->order_id) }}">Chấp nhận</a>
+                        <a href="{{ url('/order-detail/' . $orders->order_id) }}">Chi tiết hóa đơn</a>
                     </td>
                 </tr>
             @endforeach
