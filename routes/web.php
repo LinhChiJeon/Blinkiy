@@ -191,7 +191,7 @@ Route::get('/gioi-thieu', [HomeController::class, 'gioithieu'])->name('gioithieu
 
 Route::post('/accept-order/{id}', [OrderManagerController::class, 'accept_order'])->name('accept_order');
 Route::delete('/delete-order/{id}', [OrderManagerController::class, 'delete_order'])->name('delete_order');
-Route::post('/done-order/{id}', [OrderManagerController::class, 'done_order'])->name('done_order');
+Route::delete('/done-order/{id}', [OrderManagerController::class, 'done_order'])->name('done_order');
 Route::post('/see-ordered/{id}', [OrderManagerController::class, 'order_detail'])->name('order_detail');
 
 ?>

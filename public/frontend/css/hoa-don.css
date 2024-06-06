@@ -230,7 +230,9 @@ i.fa-user, i.fa-cart-shopping, i.fa-heart
     -webkit-transition: all 0.5s ease-out;
     transition: all 0.5s ease-out;
 }
-
+.background_hd{
+    background-color: #DAB076;
+}
 .invoice {
     font-family: 'Times New Roman', Times, serif;
     width: 75%;
@@ -264,11 +266,11 @@ i.fa-user, i.fa-cart-shopping, i.fa-heart
 }
 
 .item {
-    display: flex;
+    /* display: flex;
     align-items: center;
     margin-bottom: 10px;
     border-bottom: 1px solid #ddd;
-    padding-bottom: 10px;
+    padding-bottom: 10px; */
 }
 
 .item img {

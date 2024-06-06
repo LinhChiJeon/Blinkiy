@@ -78,4 +78,5 @@ class OrderManagerController extends Controller
     return redirect()->route('order_not_process_yet')->with('success', 'Order has been deleted and email sent.');
 }
 
+
 }

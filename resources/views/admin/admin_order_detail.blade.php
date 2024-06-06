@@ -1,25 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Shipping')</title>
-    <link rel="stylesheet" href="{{ asset('public/frontend/css/style_van_chuyen.css') }}">
-    <link rel="stylesheet" href="{{ asset('public/frontend/css/StyleHeaderOnly.css') }}" />
-    <link rel="stylesheet" href="{{ asset('public/frontend/css/StyleFooterOnly.css') }}" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="stylesheet" href="{{ asset('public/frontend/css/style_hoa_don.css') }}">
-    <link rel="stylesheet" href="{{ asset('public/frontend/css/style_thanh_toan.css') }}">
-    <link rel="stylesheet" href="{{ asset('public/frontend/css/style_bo_sung.css') }}" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="{{ asset('public/frontend/js/file_upload_handling.js') }}"></script>
-</head>
-<body>
-<div class="invoice">
+@extends('admin_layout')
+@section('admin_content')
+<div class = "background_hd">
+<div class="invoice" style="background-color: white">
     <h1>Hóa Đơn</h1>
     @if ($order)
-        <div class="invoice_section">
+        <div class="invoice_section" style="background: white;">
             <h2>Thông tin khách hàng</h2>
             <p>Họ tên: {{ $order->customer_name ?? '' }}</p>
             <p>Email: {{ $order->customer_email ?? '' }}</p>
@@ -49,7 +34,7 @@
         <div class="invoice_section">
             <h2>Chi tiết sản phẩm</h2>
             @foreach ($orderDetails as $item)
-                <div class="item">
+                <div class="item_admin">
                     <p class="item_name">{{ $item->product->product_name }}</p>
                     <p class="item_color">Màu: {{ $item->product->product_color }}</p>
                     <p class="item_size">Kích cỡ: {{ $item->size_id }}</p>
@@ -84,6 +69,6 @@
         <p>Không tìm thấy hóa đơn.</p>
     @endif
 </div>
+</div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-</body>
-</html>
+@endsection
