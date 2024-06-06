@@ -32,7 +32,7 @@
                     <td>{{ $orders->order_date }}</td>
                     <td>{{ $orders->order_status }}</td>
                     <td>
-                        <a href="{{ url('/order-delivered/' . $orders->order_id) }}">Đã giao</a>
+                        <a href="{{ url('/order-detail/' . $orders->order_id) }}">Đã giao</a>
                     </td>
                 </tr>
             @endforeach

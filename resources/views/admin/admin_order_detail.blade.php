@@ -50,9 +50,9 @@
             <h2>Chi tiết sản phẩm</h2>
             @foreach ($orderDetails as $item)
                 <div class="item">
-                    <p class="item_name">{{ $item->product_name }}</p>
-                    <p class="item_color">Màu: {{ $item->product_color }}</p>
-                    <p class="item_size">Kích cỡ: {{ $item->product_size }}</p>
+                    <p class="item_name">{{ $item->product->product_name }}</p>
+                    <p class="item_color">Màu: {{ $item->product->product_color }}</p>
+                    <p class="item_size">Kích cỡ: {{ $item->size_id }}</p>
                     <p class="item_quantity">SL: {{ $item->product_quantity }}</p>
                     <p class="item_price">Đơn giá: {{ number_format($item->product_price, 0, ',', '.') }} ₫</p>
                     <p class="item_total">Thành tiền: {{ number_format($item->total_price, 0, ',', '.') }} ₫</p>
@@ -63,6 +63,22 @@
             <p>Tổng tiền: {{ number_format($order->order_total_price, 0, ',', '.') }} ₫</p>
             <p>Phí giao hàng: 30,000 ₫</p>
             <p>Thành tiền: {{ number_format($order->order_total_price + 30000, 0, ',', '.') }} ₫</p>
+        </div>
+        <div class="invoice_section">
+            <form action="{{ route('accept_order', ['id' => $order->order_id]) }}" method="POST" style="display:inline;">
+                @csrf
+                <button type="submit" class="btn btn-success">Chấp nhận đơn hàng</button>
+            </form>
+            <form action="{{ route('delete_order', ['id' => $order->order_id]) }}" method="POST" style="display:inline;">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-danger">Xóa đơn hàng</button>
+            </form>
+            <form action="{{ route('done_order', ['id' => $order->order_id]) }}" method="POST" style="display:inline;">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-danger">Hoàn thành đơn hàng</button>
+            </form>
         </div>
     @else
         <p>Không tìm thấy hóa đơn.</p>

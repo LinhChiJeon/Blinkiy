@@ -32,7 +32,7 @@
                     <td>{{ $orders->order_date }}</td>
                     <td>{{ $orders->order_status }}</td>
                     <td>
-                        <a href="{{ url('/accept-order/' . $orders->order_id) }}"></a>
+                        <a href="{{ url('/accept-order/' . $orders->order_id) }}">Xem lại đơn hàng</a>
                     </td>
                 </tr>
             @endforeach
