@@ -278,10 +278,7 @@ i.fa-user, i.fa-cart-shopping, i.fa-heart
     grid-template-columns: 100%;
     /* padding-bottom: 20px; */
 }
-.item_total_admin
-{
-    font-weight: bold;
-}
+
 
 .item img {
     width: 100px;

@@ -1,6 +1,6 @@
 @extends('admin_layout')
 @section('admin_content')
-<div class = "background_hd">
+<div class="background_hd"> 
 <div class="invoice" style="background-color: white">
     <h1>Hóa Đơn</h1>
     @if ($order)
@@ -39,8 +39,8 @@
                     <p class="item_color_admin">Màu: {{ $item->product->product_color }}</p>
                     <p class="item_size_admin">Kích cỡ: {{ $item->size_id }}</p>
                     <p class="item_quantity_admin">SL: {{ $item->product_quantity }}</p>
-                        <p class="item_price_admin">Đơn giá: {{ number_format($item->product_price, 0, ',', '.') }} ₫</p>
-                        <p class="item_total_admin" style="font-weight:bold">Thành tiền: {{ number_format($item->total_price, 0, ',', '.') }} ₫</p>
+                    <p class="item_price_admin">Đơn giá: {{ number_format($item->product_price, 0, ',', '.') }} ₫</p>
+                    <p class="item_total_admin" style="font-weight:bold">Thành tiền: {{ number_format($item->total_price, 0, ',', '.') }} ₫</p>
                     <hr>
                 </div>
             @endforeach
@@ -51,21 +51,28 @@
             <p style="font-weight:bold">Thành tiền: {{ number_format($order->order_total_price + 30000, 0, ',', '.') }} ₫</p>
         </div>
         <div class="invoice_section">
-            <form action="{{ route('accept_order', ['id' => $order->order_id]) }}" method="POST" style="display:inline;">
-                @csrf
-                <button type="submit" class="btn btn-success">Chấp nhận đơn hàng</button>
-            </form>
-            <form action="{{ route('delete_order', ['id' => $order->order_id]) }}" method="POST" style="display:inline;">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="btn btn-danger">Xóa đơn hàng</button>
-            </form>
-            <form action="{{ route('done_order', ['id' => $order->order_id]) }}" method="POST" style="display:inline;">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="btn btn-danger"
-                style="background-color:dodgerblue; border-color:dodgerblue">Hoàn thành đơn hàng</button>
-            </form>
+            @if ($order->order_status == 'Pending')
+                <form action="{{ route('accept_order', ['id' => $order->order_id]) }}" method="POST" style="display:inline;">
+                    @csrf
+                    <button type="submit" class="btn btn-success">Chấp nhận đơn hàng</button>
+                </form>
+                <form action="{{ route('delete_order', ['id' => $order->order_id]) }}" method="POST" style="display:inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger">Xóa đơn hàng</button>
+                </form>
+            @elseif ($order->order_status == 'Shipping')
+                <form action="{{ route('done_order', ['id' => $order->order_id]) }}" method="POST" style="display:inline;">
+                    @csrf
+                    @method('POST')
+                    <button type="submit" class="btn btn-primary">Hoàn thành đơn hàng</button>
+                </form>
+                <form action="{{ route('delete_order', ['id' => $order->order_id]) }}" method="POST" style="display:inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger">Xóa đơn hàng</button>
+                </form>
+            @endif
         </div>
     @else
         <p>Không tìm thấy hóa đơn.</p>
